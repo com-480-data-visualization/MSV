@@ -26,9 +26,19 @@ The goal is to produce clear and intuitive visualization on perfume data includi
 
 ## Exploratory Data Analysis
 
-TODO
+The Fragrantica dataset contains 24,063 perfumes across 18 columns. The gender split is 47.3% women, 32.0% unisex, and 20.7% men. 
 
-Missing value, stats on most seen tones( for male and for female), stats tone vs ratings
+Missing values are limited to a few columns: release year is absent for 8.5% of entries, and 94.4% of perfumes list only one perfumer (the second perfumer field is intentionally sparse). 
+
+Fragrance notes in the top, middle, and base columns are present for the vast majority of entries. User ratings, stored as a numeric score between 3.0 and 4.0, are available for a small subset of perfumes (mean = 3.99, std = 0.10), suggesting that only popular or well-reviewed fragrances accumulate enough votes to appear.
+
+Across all three note layers (top, middle, base), the most frequent ingredients are musk (11,022 occurrences), bergamot (8,617), sandalwood (8,059), jasmine (7,745), and amber (7,730). These five notes dominate overall.
+
+Gender-specific preferences are still visible. For women's perfumes, the most common notes are musk, jasmine, sandalwood, rose, and bergamot (on the floral and soft-woody profile). Men's perfumes favor bergamot, musk, patchouli, amber, and cedar, indicating a preference towards earthier, resinous, and woody compositions. This goes along the classic industry marketing direction.
+
+Regarding the relationship between notes and ratings, notes with the highest average scores (among those in at least 50 rated perfumes) include grapefruit, musk, amber, pink pepper, lavender, ylang-ylang, and tonka bean, all averaging near 4.0. Sandalwood, cedar, and vanilla follow closely. This suggests that warm, enveloping bases and fresh citrus top notes correlate with higher user appreciation.
+
+The eBay e-commerce dataset contains 1,000 men's listings (price range: \$3–\$259, mean \$46) and 1,000 women's listings (price range: \$2–\$300, mean \$40), can offer a complementary market perspective.
 
 ---
 
