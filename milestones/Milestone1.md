@@ -26,9 +26,23 @@ The goal is to produce clear and intuitive visualization on perfume data includi
 
 ## Exploratory Data Analysis
 
-TODO
+The Fragrantica dataset contains 24,063 perfumes across 18 columns. The gender split is 47.3% women, 32.0% unisex, and 20.7% men. Missing values are limited to a few columns: release year is absent for 8.5% of entries, and 94.4% of perfumes list only one perfumer (the second perfumer field is intentionally sparse). 
 
-Missing value, stats on most seen tones( for male and for female), stats tone vs ratings
+Fragrance notes in the Top, Middle, and Base columns are present for the vast majority of entries. User ratings, stored as a numeric score between 3.0 and 4.0, are available for a small subset of perfumes (mean = 3.99, std = 0.10), suggesting that only popular or well-reviewed fragrances accumulate enough votes to appear.
+
+Across all three note layers (top, middle, base), the most frequent ingredients are musk (11,022 occurrences), bergamot (8,617), sandalwood (8,059), jasmine (7,745), and amber (7,730). These five notes dominate the dataset and reflect the broad aromatic vocabulary shared across genders.
+
+![Top 10 most common fragrance notes across the full dataset](figures/top10_notes.png)
+
+Gender-specific preferences are nonetheless visible. For women's perfumes, the most common notes are musk, jasmine, sandalwood, rose, and bergamot — a predominantly floral and soft-woody profile. Men's perfumes favor bergamot, musk, patchouli, amber, and cedar, indicating a shift toward earthier, resinous, and woody compositions. This difference is consistent with established market conventions in perfumery.
+
+![Top 5 notes for women vs. men](figures/notes_by_gender.png)
+
+The heatmap below expresses each note's share of total occurrences within each gender category. It confirms that jasmine and rose are disproportionately present in women's perfumes, while patchouli and cedar are concentrated in men's. Musk and bergamot stand out as genuinely cross-gender staples.
+
+![Note frequency heatmap by gender](figures/note_heatmap.png)
+
+Regarding ratings, notes with the highest average scores (among those in at least 50 rated perfumes) include grapefruit, musk, amber, pink pepper, lavender, ylang-ylang, and tonka bean, all averaging near 4.0. This suggests that warm bases and fresh citrus top notes correlate with higher user appreciation. The eBay dataset adds a market dimension: men's listings range from \$3 to \$259 (mean \$46) and women's from \$2 to \$300 (mean \$40).
 
 ---
 
