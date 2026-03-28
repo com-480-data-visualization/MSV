@@ -319,8 +319,10 @@ strong {
   margin: 0 auto;
   padding: 0 2.5rem;
   height: auto;
-  min-height: 500px;
+  min-height: 600px;
   overflow: visible;
+  background: transparent;
+  border: none;
 }
 
 /* ============================================

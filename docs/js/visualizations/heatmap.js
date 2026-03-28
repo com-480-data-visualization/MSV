@@ -120,7 +120,7 @@
 
     // ── SVG setup ──
     var svgContainer = document.createElement('div');
-    svgContainer.style.cssText = 'width:100%;overflow:hidden;';
+    svgContainer.style.cssText = 'width:100%;overflow:visible;';
     container.appendChild(svgContainer);
 
     // ── Load data ──
@@ -340,11 +340,20 @@
             // Collapse
             expandedAccord = null;
             expansionGroup.selectAll('*').remove();
+            svg.attr('height', totalHeight);
+            cells.attr('stroke', CELL_BORDER_COLOR).attr('stroke-width', 1);
             return;
           }
 
           expandedAccord = clickedAccord;
           expansionGroup.selectAll('*').remove();
+
+          // Highlight the clicked row
+          cells.each(function (cd) {
+            d3.select(this)
+              .attr('stroke', cd.accord === clickedAccord ? ACCENT_GOLD : CELL_BORDER_COLOR)
+              .attr('stroke-width', cd.accord === clickedAccord ? 2 : 1);
+          });
 
           // Find cooccurrence data for this accord
           var coocs = (raw.cooccurrence || [])
@@ -362,11 +371,11 @@
 
           if (coocs.length === 0) return;
 
-          // Position expansion below the clicked row
-          var expandY = (d.rowIdx + 1) * cellHeight + 6;
-          var barHeight = 18;
-          var barGap = 3;
-          var expandHeight = coocs.length * (barHeight + barGap) + 20;
+          // Position expansion below ALL rows (not just clicked row)
+          var expandY = accordNames.length * cellHeight + 10;
+          var barHeight = 20;
+          var barGap = 4;
+          var expandHeight = coocs.length * (barHeight + barGap) + 30;
 
           // Background panel
           expansionGroup.append('rect')
@@ -440,6 +449,23 @@
             .delay(TRANSITION_MS)
             .duration(TRANSITION_MS)
             .attr('opacity', 0.8);
+
+          // Expand SVG to fit the expansion panel
+          var newHeight = MARGIN.top + expandY + expandHeight + 20;
+          if (newHeight > totalHeight) {
+            svg.attr('height', newHeight);
+          }
+
+          // Scroll the expansion into view
+          setTimeout(function () {
+            var panel = expansionGroup.node();
+            if (panel) {
+              var rect = panel.getBoundingClientRect();
+              if (rect.bottom > window.innerHeight) {
+                window.scrollBy({ top: rect.bottom - window.innerHeight + 40, behavior: 'smooth' });
+              }
+            }
+          }, 100);
         });
 
         // Click outside to collapse expansion
@@ -447,6 +473,7 @@
           if (expandedAccord) {
             expandedAccord = null;
             expansionGroup.selectAll('*').remove();
+            svg.attr('height', totalHeight);
           }
         });
       }
