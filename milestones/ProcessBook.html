@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Process Book: The Anatomy of Scent</title>
+  <style>
+    /* ============================================
+       PROCESS BOOK: Print-optimized styles
+       A4 format, 8 pages max
+       ============================================ */
+
+    @page {
+      size: A4;
+      margin: 2cm 2.5cm;
+      @bottom-center {
+        content: counter(page);
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: 9pt;
+        color: #666;
+      }
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 11pt;
+      line-height: 1.55;
+      color: #1a1a1a;
+      background: #fff;
+      max-width: 210mm;
+      margin: 0 auto;
+      padding: 2cm 2.5cm;
+    }
+
+    /* Page breaks */
+    .page {
+      page-break-after: always;
+      min-height: 0;
+    }
+
+    .page:last-child {
+      page-break-after: avoid;
+    }
+
+    /* Typography */
+    h1 {
+      font-size: 26pt;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      margin-bottom: 0.2em;
+      color: #111;
+    }
+
+    h2 {
+      font-size: 16pt;
+      font-weight: 600;
+      margin-top: 1.4em;
+      margin-bottom: 0.5em;
+      color: #222;
+      border-bottom: 1.5px solid #c9a96e;
+      padding-bottom: 0.2em;
+    }
+
+    h3 {
+      font-size: 12pt;
+      font-weight: 600;
+      margin-top: 1em;
+      margin-bottom: 0.3em;
+      color: #333;
+    }
+
+    p {
+      margin-bottom: 0.6em;
+      text-align: justify;
+      hyphens: auto;
+    }
+
+    .subtitle {
+      font-size: 13pt;
+      font-style: italic;
+      color: #555;
+      margin-bottom: 0.3em;
+    }
+
+    .team-info {
+      font-size: 10.5pt;
+      color: #444;
+      margin-bottom: 0.2em;
+    }
+
+    .course-info {
+      font-size: 10pt;
+      color: #666;
+      margin-bottom: 1.5em;
+    }
+
+    /* Title page styling */
+    .title-block {
+      text-align: center;
+      padding-top: 4cm;
+      padding-bottom: 2cm;
+    }
+
+    .title-block h1 {
+      font-size: 32pt;
+      margin-bottom: 0.4em;
+    }
+
+    .title-separator {
+      width: 60px;
+      height: 2px;
+      background: #c9a96e;
+      margin: 1em auto;
+    }
+
+    /* Lists */
+    ul, ol {
+      margin-left: 1.5em;
+      margin-bottom: 0.6em;
+    }
+
+    li {
+      margin-bottom: 0.25em;
+    }
+
+    /* Code and technical terms */
+    code {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 9.5pt;
+      background: #f4f4f4;
+      padding: 0.1em 0.3em;
+      border-radius: 2px;
+    }
+
+    /* Sketch blocks (ASCII art descriptions) */
+    .sketch-box {
+      background: #f8f7f5;
+      border: 1px solid #ddd;
+      border-left: 3px solid #c9a96e;
+      padding: 0.8em 1em;
+      margin: 0.8em 0;
+      font-size: 10pt;
+    }
+
+    .sketch-box .sketch-label {
+      font-weight: 600;
+      font-size: 9.5pt;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #888;
+      margin-bottom: 0.3em;
+    }
+
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.8em 0;
+      font-size: 10pt;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 0.4em 0.6em;
+      text-align: left;
+    }
+
+    th {
+      background: #f4f3f0;
+      font-weight: 600;
+    }
+
+    /* Columns layout */
+    .two-col {
+      display: flex;
+      gap: 1.5em;
+    }
+
+    .two-col > div {
+      flex: 1;
+    }
+
+    /* Emphasis */
+    strong {
+      font-weight: 600;
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    /* Compact list for file names */
+    .file-list {
+      font-size: 10pt;
+      columns: 2;
+      column-gap: 1.5em;
+    }
+
+    .file-list li {
+      margin-bottom: 0.15em;
+    }
+
+    /* Insight callout */
+    .insight {
+      background: #faf8f4;
+      border-left: 3px solid #c9a96e;
+      padding: 0.6em 1em;
+      margin: 0.6em 0;
+      font-size: 10.5pt;
+      font-style: italic;
+    }
+
+    /* Assessment table */
+    .assessment-table td:first-child {
+      width: 30%;
+      font-weight: 600;
+    }
+
+    /* Print-specific */
+    @media print {
+      body {
+        padding: 0;
+        font-size: 11pt;
+      }
+
+      .page {
+        page-break-after: always;
+      }
+
+      .page:last-child {
+        page-break-after: avoid;
+      }
+
+      h2 {
+        page-break-after: avoid;
+      }
+
+      .sketch-box, table, .insight {
+        page-break-inside: avoid;
+      }
+    }
+
+    /* Screen-only: page separators */
+    @media screen {
+      .page {
+        border-bottom: 2px dashed #ddd;
+        padding-bottom: 2em;
+        margin-bottom: 2em;
+      }
+
+      body {
+        padding: 1.5cm 2cm;
+        max-width: 800px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ==================== PAGE 1: OVERVIEW ==================== -->
+<div class="page">
+  <div class="title-block">
+    <h1>The Anatomy of Scent</h1>
+    <div class="subtitle">Process Book</div>
+    <div class="title-separator"></div>
+    <p class="team-info">Alexandre Mourot (346365) &amp; Ga&euml;l Conde Losada (329871)</p>
+    <p class="course-info">COM-480 Data Visualization, EPFL, Spring 2026</p>
+  </div>
+
+  <h2>Overview</h2>
+
+  <p>
+    We built a scrollytelling website that explores what makes a perfume attractive. Using 24,063 perfumes scraped from Fragrantica and over 2,000 eBay listings, the site walks the reader through perfume composition patterns, gender differences in fragrance profiles, temporal trends spanning five decades, and the relationship between scent and market price. Eight interactive D3.js visualizations drive the narrative, each revealing a different facet of the data.
+  </p>
+
+  <p>
+    Our target audience sits at the intersection of three groups. Perfume enthusiasts who want to see their passion through a data lens come first. Then there are data visualization lovers who appreciate well crafted interactive storytelling. Finally, we wanted to reach curious people who have never considered why bergamot shows up in nearly every fragrance they own. The goal was to surprise all three.
+  </p>
+
+  <p>
+    The motivation behind this project came from a simple observation: perfumery is an art form built on hidden structure. Every perfume follows a three layer architecture of top, middle, and base notes. Certain ingredients appear thousands of times while others remain rare signatures. We wanted to make that invisible structure visible, and to ask whether the patterns we found could explain why some fragrances succeed while others fade into obscurity.
+  </p>
+
+  <p>
+    The site was designed to feel like walking into a high end perfume boutique. Dark background, refined typography, gold accents. Not a dashboard. A story, told section by section as the reader scrolls.
+  </p>
+</div>
+
+
+<!-- ==================== PAGE 2: DATA AND PROCESSING ==================== -->
+<div class="page">
+  <h2>Data and Processing</h2>
+
+  <h3>Datasets</h3>
+
+  <p>
+    Our primary dataset is the <strong>Fragrantica Fragrance Dataset</strong> from Kaggle, containing 24,063 perfumes across 18 columns. Each entry includes the perfume name, brand, gender category, release year, user rating, fragrance accords, and three columns listing top, middle, and base notes as comma separated text. The gender distribution splits roughly 47% women, 32% unisex, and 21% men.
+  </p>
+
+  <p>
+    We supplemented this with the <strong>Perfume E-commerce Dataset 2024</strong>, also from Kaggle, containing around 2,000 eBay listings split between men's and women's perfumes. This dataset adds pricing information, with men's listings ranging from $3 to $259 (mean $46) and women's from $2 to $300 (mean $40). Since the data comes from eBay, the pricing insights reflect primarily the U.S. market.
+  </p>
+
+  <h3>Data Quality</h3>
+
+  <p>
+    The Fragrantica data was generally clean but required meaningful preprocessing. Fragrance notes were stored as plain text strings that needed parsing into structured arrays. Similar note names required grouping into broader families (floral, woody, citrus, spicy, and others). Release year was absent for 8.5% of entries, and user ratings were only available for a subset of perfumes with enough votes. The eBay data posed a different challenge: brand names did not always match cleanly between the two datasets, requiring fuzzy matching.
+  </p>
+
+  <h3>Processing Pipeline</h3>
+
+  <p>
+    We processed everything in Python using pandas. The pipeline parsed note text into arrays, grouped 500+ unique note names into families, computed co-occurrence matrices for the chord diagram, built the Sankey flow from top through middle to base notes, and aggregated statistics by gender and decade. A key decision was to pre-compute the expensive aggregations in Python rather than doing them client side. The raw Fragrantica CSV alone is over 12 MB, far too heavy for a browser to process interactively.
+  </p>
+
+  <p>The pipeline outputs eight JSON files, each tailored to a specific visualization:</p>
+
+  <ul class="file-list">
+    <li><code>perfumes.json</code> (full perfume records)</li>
+    <li><code>notes_stats.json</code> (frequency and rating per note)</li>
+    <li><code>notes_stats_enhanced.json</code> (with family groupings)</li>
+    <li><code>temporal_trends.json</code> (note families by decade)</li>
+    <li><code>price_data.json</code> (eBay pricing merged with composition)</li>
+    <li><code>accords_data.json</code> (accord frequency and ratings)</li>
+    <li><code>chord_data.json</code> (pre-computed co-occurrence matrix)</li>
+    <li><code>sankey_data.json</code> (top to middle to base note flows)</li>
+  </ul>
+
+  <p>
+    This separation of concerns meant the frontend only needed to fetch small, purpose built JSON files and bindthem directly to D3.js selections. No client side data wrangling.
+  </p>
+</div>
+
+
+<!-- ==================== PAGES 3-4: DESIGN EVOLUTION ==================== -->
+<div class="page">
+  <h2>Design Evolution</h2>
+
+  <h3>Initial Sketches</h3>
+
+  <p>
+    In Milestone 2, we sketched five core visualizations on paper. The opening section featured a beeswarm chart where each bubble represented a fragrance note, sized by frequency, with bubbles floating upward like scent molecules and clustered by note family. The second section placed side by side radar charts for men's and women's fragrance profiles. The third mapped note frequency against average rating in a bubble chart. A stacked area chart tracked note popularity across decades for the fourth section. The fifth combined eBay pricing with composition profiles in a scatter plot.
+  </p>
+
+  <p>
+    Two additional visualizations were planned as interactive sidebars: a chord diagram for note co-occurrence and a Sankey diagram for the top to middle to base flow.
+  </p>
+
+  <h3>Inspiration</h3>
+
+  <p>
+    The beeswarm concept drew directly from "Fragrance of Data," a project recognized at the Information is Beautiful Awards that used a similar particle aesthetic to represent scent data. Our scrollytelling structure was inspired by The Pudding, whose long form data stories use scroll position to control narrative pacing. We wanted the same feeling of the data revealing itself gradually as the reader moves through the page.
+  </p>
+
+  <h3>Visual Identity Decisions</h3>
+
+  <p>
+    Early on, we committed to a dark luxury aesthetic that would set the tone before any data appeared. The color scheme uses <code>#0a0a0a</code> as the primary background with <code>#c9a96e</code> gold accents, a palette that evokes the matte black and gold foil of high end perfume packaging. Typography pairs Cormorant Garamond for headings (an elegant serif with visible calligraphic DNA) with DM Sans for body text (a clean geometric sans serif that reads well at small sizes on dark backgrounds).
+  </p>
+
+  <h3>How the Sketches Evolved</h3>
+
+  <div class="sketch-box">
+    <div class="sketch-label">Beeswarm (Section 1)</div>
+    <p><strong>Before:</strong> Static bubble chart with manual positioning. All notes visible at once, creating visual clutter with 500+ circles competing for attention.</p>
+    <p><strong>After:</strong> D3 force simulation with scroll triggered transitions. The chart reveals notes progressively across four scroll steps: first musk alone, then bergamot, then the top 10, then the full constellation. Family clustering uses color encoding rather than spatial separation.</p>
+  </div>
+
+  <div class="sketch-box">
+    <div class="sketch-label">Radar Charts (Section 2)</div>
+    <p><strong>Before:</strong> Two separate static radar charts placed side by side. Eight axes representing the top note families.</p>
+    <p><strong>After:</strong> Overlaid radar polygons that animate in sequence. Women's profile appears first, then men's overlays with a different color, making the comparison immediate. A toggle adds unisex as a third layer. The axes label the actual note families from the data rather than generic categories.</p>
+  </div>
+
+  <div class="sketch-box">
+    <div class="sketch-label">Timeline (Section 4)</div>
+    <p><strong>Before:</strong> Simple stacked area chart from 1970 to 2020, showing all note families simultaneously.</p>
+    <p><strong>After:</strong> Scroll controlled decade highlighting. As the reader progresses, each decade receives a focus state with annotations explaining the cultural context (the clean 1990s, the gourmand 2010s). The non-focused decades fade to lower opacity.</p>
+  </div>
+</div>
+
+<div class="page">
+  <h3>Key Technical Design Decisions</h3>
+
+  <p>
+    <strong>Scrollama for scroll management.</strong> We chose Scrollama over custom scroll event listeners because it wraps the IntersectionObserver API cleanly and handles the tricky math of determining which "step" element is currently active. This let us define narrative beats as simple HTML divs and trigger D3 transitions declaratively.
+  </p>
+
+  <p>
+    <strong>Lenis for smooth scrolling.</strong> Native browser scroll felt abrupt during testing, especially on sections where the visualization needed to hold steady while text scrolled past. Lenis adds momentum and easing (we used an exponential decay function with duration 1.2s) that makes the experience feel polished without fighting the browser.
+  </p>
+
+  <p>
+    <strong>Lazy initialization via IntersectionObserver.</strong> This was not in our original plan. We discovered a critical bug during development: several visualizations rendered at zero width because their SVG containers had no dimensions at initialization time. The root cause was CSS flex layout combined with sticky positioning. Containers below the fold had a computed width of 0 when the page loaded. Our fix was to defer initialization until an IntersectionObserver detects the container entering the viewport. This solved the sizing bug and also improved initial page load time since only the hero and first section initialize immediately.
+  </p>
+
+  <p>
+    <strong>Pre-computed chord and Sankey data.</strong> Our first attempt computed the note co-occurrence matrix in JavaScript by iterating through all 24,063 perfumes and cross-referencing their top, middle, and base notes. On a modern laptop this took over 4 seconds, which is unacceptable in a scroll driven experience. We moved the computation to a Python script (<code>compute_advanced_data.py</code>) that generates <code>chord_data.json</code> and <code>sankey_data.json</code> as static files. The browser now just fetches the pre-built matrix.
+  </p>
+
+  <p>
+    <strong>Shared utilities.</strong> Rather than duplicating tooltip logic, color scales, and note family mappings across eight visualization files, we centralized them in <code>main.js</code>. Each visualization module (e.g., <code>beeswarm.js</code>, <code>chord.js</code>) follows the same pattern: a single initialization function that takes a container selector, fetches its specific JSON file, and builds the SVG. This kept the codebase modular without introducing a build system.
+  </p>
+
+  <div class="sketch-box">
+    <div class="sketch-label">Deep Dive Section (Chord + Sankey)</div>
+    <p><strong>Before:</strong> Planned as floating sidebar panels that would appear alongside the main narrative sections.</p>
+    <p><strong>After:</strong> Dedicated section (Section 6) with a two column card layout. The sidebar concept broke on narrow viewports and created confusing z-index conflicts with the sticky scrollytelling containers. A dedicated section gave both visualizations room to breathe and simplified the layout logic.</p>
+  </div>
+
+  <div class="sketch-box">
+    <div class="sketch-label">Heatmap (Section 7)</div>
+    <p><strong>Before:</strong> Not in the original Milestone 2 sketches. We originally planned a perfume search feature as the final interactive element.</p>
+    <p><strong>After:</strong> We replaced the search feature with a full width interactive heatmap of note frequency by gender. The search feature required a much larger JSON payload (individual perfume records) and complex fuzzy matching logic. The heatmap proved more visually striking and told a clearer story about gender differences in fragrance composition.</p>
+  </div>
+</div>
+
+
+<!-- ==================== PAGES 5-6: IMPLEMENTATION ==================== -->
+<div class="page">
+  <h2>Implementation and Challenges</h2>
+
+  <h3>Technology Stack</h3>
+
+  <table>
+    <tr>
+      <th>Layer</th>
+      <th>Technology</th>
+      <th>Purpose</th>
+    </tr>
+    <tr>
+      <td>Visualization</td>
+      <td>D3.js v7</td>
+      <td>All eight interactive charts</td>
+    </tr>
+    <tr>
+      <td>Scroll management</td>
+      <td>Scrollama</td>
+      <td>Triggering transitions on scroll position</td>
+    </tr>
+    <tr>
+      <td>Smooth scroll</td>
+      <td>Lenis 1.1</td>
+      <td>Momentum scrolling and easing</td>
+    </tr>
+    <tr>
+      <td>Sankey layout</td>
+      <td>d3-sankey 0.12</td>
+      <td>Node/link positioning for flow diagram</td>
+    </tr>
+    <tr>
+      <td>Data processing</td>
+      <td>Python 3, pandas</td>
+      <td>CSV parsing, aggregation, JSON export</td>
+    </tr>
+    <tr>
+      <td>Frontend</td>
+      <td>Vanilla HTML/CSS/JS</td>
+      <td>No framework, no build step</td>
+    </tr>
+    <tr>
+      <td>Hosting</td>
+      <td>GitHub Pages</td>
+      <td>Static deployment from <code>/docs</code></td>
+    </tr>
+  </table>
+
+  <p>
+    We deliberately avoided frontend frameworks. A scrollytelling site with eight D3 visualizations does not need React's component model, and adding a build step would have complicated the GitHub Pages deployment. Every visualization lives in its own file under <code>js/visualizations/</code>, and <code>main.js</code> orchestrates initialization, scroll events, and shared utilities like color scales and tooltip rendering.
+  </p>
+
+  <h3>Architecture</h3>
+
+  <p>
+    The site follows a simple pattern. The HTML defines eight section containers, each with an <code>id</code> matching its visualization (e.g., <code>viz-beeswarm</code>, <code>viz-chord</code>). The five scrollytelling sections use a two column layout: a sticky graphic container on the left holds the SVG, while scrollable text steps on the right drive transitions. The remaining three visualizations (chord, sankey, heatmap) use simpler layouts since they do not need scroll linked narrative.
+  </p>
+
+  <p>
+    Data flows in one direction: Python scripts read the raw CSVs, compute aggregations, and write JSON files to <code>docs/data/</code>. The JavaScript never touches raw data. Each visualization module fetches its JSON, binds the data to SVG elements using D3's data join pattern, and registers its own interaction handlers.
+  </p>
+
+  <h3>Challenge 1: Note Taxonomy</h3>
+
+  <p>
+    The Fragrantica dataset contains over 500 unique note names with no standardized taxonomy. "White musk" and "musk" are semantically identical. "Pink pepper" belongs to the spicy family but could also be classified as fruity. We needed a consistent family mapping to drive the beeswarm clustering, radar chart axes, and timeline categories.
+  </p>
+
+  <p>
+    Our solution was a manually curated mapping table in the Python processing script. We grouped notes into seven families: floral, woody, citrus, spicy, fresh, sweet, and musky. Ambiguous notes were assigned based on how perfumers typically classify them. This required reading actual perfumery references rather than guessing. The mapping is imperfect (some notes genuinely belong to multiple families) but it provides a consistent lens across all visualizations.
+  </p>
+
+  <h3>Challenge 2: SVG Sizing Bug</h3>
+
+  <p>
+    This was our most frustrating bug. Several visualizations rendered as invisible 0-pixel wide SVGs. The cause took hours to diagnose. In the scrollytelling layout, the sticky graphic container uses CSS <code>position: sticky</code> inside a flex parent. On initial page load, containers below the viewport had a computed width of 0 because the browser had not yet laid them out. Our D3 code read <code>container.clientWidth</code> during initialization and created an SVG with width 0.
+  </p>
+
+  <p>
+    The fix was lazy initialization. We wrapped each visualization's init function in an IntersectionObserver callback that fires only when the container first enters the viewport. By that point, the browser has computed the layout and <code>clientWidth</code> returns the correct value. This pattern also improved performance since visualizations below the fold no longer compete for resources during initial load.
+  </p>
+</div>
+
+<div class="page">
+  <h3>Challenge 3: Chord and Sankey Performance</h3>
+
+  <p>
+    Computing note co-occurrence from 24,063 perfumes means iterating through every perfume, extracting all note pairs across top, middle, and base layers, and incrementing a matrix cell for each pair. In JavaScript, this loop took over 4 seconds on a mid-range laptop. For a scroll driven site where the user might reach the chord diagram section within 30 seconds of loading, a 4-second computation freeze is a dealbreaker.
+  </p>
+
+  <p>
+    We moved the entire computation to <code>src/compute_advanced_data.py</code>. The Python script generates a filtered co-occurrence matrix (keeping only the top 20 most connected notes to avoid visual clutter) and a Sankey flow dataset (top 15 flows from each layer). The resulting JSON files are under 50 KB each. The browser just fetches and renders.
+  </p>
+
+  <h3>Challenge 4: Dark Theme Contrast</h3>
+
+  <p>
+    The dark luxury theme created readability issues we did not anticipate. Our first version used grid lines at opacity 0.06, which were completely invisible on most monitors. Axis labels in the default D3 grey disappeared against <code>#0a0a0a</code>. Chart borders blended into the background.
+  </p>
+
+  <p>
+    We went through three rounds of contrast tuning. Grid lines moved to opacity 0.15. Axis text switched to <code>#9a9088</code> (our <code>text-secondary</code> variable). We added subtle <code>rgba(201, 169, 110, 0.12)</code> borders to card containers. The gold accent (<code>#c9a96e</code>) served double duty as a highlight color and as a border/separator that is visible without being harsh.
+  </p>
+
+  <h3>Challenge 5: Responsive Design</h3>
+
+  <p>
+    Scrollytelling fundamentally assumes a wide viewport. The pattern relies on side by side layout: sticky graphic on one side, scrolling text on the other. On a phone screen, this breaks. The graphic shrinks to an unusable size or the text overlaps the chart.
+  </p>
+
+  <p>
+    We implemented CSS media queries that stack the layout vertically on screens narrower than 768px. The graphic sits above and scrolls with the page instead of staying sticky. Text steps appear below each visualization. This is a compromise: the scroll triggered transitions still fire, but the user sees the chart above rather than beside the text. It works, but the experience is noticeably better on desktop. Given more time, we would have built a separate mobile layout with smaller, simplified chart versions.
+  </p>
+
+  <h3>Deployment</h3>
+
+  <p>
+    The site deploys from the <code>/docs</code> directory via GitHub Pages. Because we have no build step, deployment is just a git push. The JSON data files live in <code>docs/data/</code> alongside the HTML, CSS, and JS. Total deployed size is under 15 MB, with the largest file being <code>perfumes.json</code> at about 8 MB (loaded only when needed for search or filtering, not on initial render).
+  </p>
+</div>
+
+
+<!-- ==================== PAGE 7: FINAL VISUALIZATIONS ==================== -->
+<div class="page">
+  <h2>Final Visualizations</h2>
+
+  <p>The website presents eight visualizations across seven sections. Each one answers a different question about perfume data.</p>
+
+  <table>
+    <tr>
+      <th>Visualization</th>
+      <th>Type</th>
+      <th>What It Shows</th>
+    </tr>
+    <tr>
+      <td>1. Building Blocks</td>
+      <td>Beeswarm / force layout</td>
+      <td>Frequency of each fragrance note across 24K perfumes, clustered by family</td>
+    </tr>
+    <tr>
+      <td>2. His &amp; Hers</td>
+      <td>Radar chart</td>
+      <td>Note family profiles compared across women's, men's, and unisex perfumes</td>
+    </tr>
+    <tr>
+      <td>3. Ratings Game</td>
+      <td>Bubble chart</td>
+      <td>Note frequency vs. average user rating, sized by perfume count</td>
+    </tr>
+    <tr>
+      <td>4. Fifty Years</td>
+      <td>Stacked area / timeline</td>
+      <td>Shifts in note family popularity from the 1970s to the 2020s</td>
+    </tr>
+    <tr>
+      <td>5. Price of Scent</td>
+      <td>Scatter plot</td>
+      <td>eBay pricing patterns across gender and composition profiles</td>
+    </tr>
+    <tr>
+      <td>6a. Note Connections</td>
+      <td>Chord diagram</td>
+      <td>Which notes most frequently co-occur in the same perfume</td>
+    </tr>
+    <tr>
+      <td>6b. Flow of Fragrance</td>
+      <td>Sankey diagram</td>
+      <td>How notes flow from top layer through middle to base</td>
+    </tr>
+    <tr>
+      <td>7. Full Picture</td>
+      <td>Interactive heatmap</td>
+      <td>Note frequency breakdown by gender category</td>
+    </tr>
+  </table>
+
+  <h3>Key Insights Discovered</h3>
+
+  <div class="insight">
+    <strong>Musk and bergamot are universal.</strong> These two notes appear in both men's and women's top 5 most frequent ingredients. They are the invisible foundation that modern perfumery shares across all gender categories.
+  </div>
+
+  <div class="insight">
+    <strong>Rarity correlates with higher ratings.</strong> Notes like pink pepper and tonka bean appear in relatively few perfumes but carry some of the highest average user scores. The bubble chart makes this pattern immediately visible in the upper left quadrant.
+  </div>
+
+  <div class="insight">
+    <strong>Gender differences are real but concentrated.</strong> Floral notes (jasmine, rose, lily of the valley) dominate women's perfumes while woody and spicy notes (patchouli, cedar, vetiver) dominate men's. But the overlap is larger than most people expect. The radar chart overlay makes this clear.
+  </div>
+
+  <div class="insight">
+    <strong>Perfume composition has shifted dramatically.</strong> The timeline reveals a clear arc from aldehydic glamour in the 1970s through the clean aquatic 1990s to the gourmand and oud explosion of the 2010s and 2020s. Fragrance trends mirror broader cultural movements.
+  </div>
+
+  <div class="insight">
+    <strong>Price does not strongly correlate with composition complexity.</strong> Premium brands use slightly more complex note structures, but the scatter plot shows no clean linear relationship. Brand cachet and marketing appear to drive pricing more than raw ingredient sophistication.
+  </div>
+</div>
+
+
+<!-- ==================== PAGE 8: PEER ASSESSMENT AND CONCLUSION ==================== -->
+<div class="page">
+  <h2>Peer Assessment</h2>
+
+  <p>We split the work equally (50/50) with each team member owning distinct deliverables.</p>
+
+  <table class="assessment-table">
+    <tr>
+      <th>Area</th>
+      <th>Alexandre Mourot</th>
+      <th>Ga&euml;l Conde Losada</th>
+    </tr>
+    <tr>
+      <td>Data</td>
+      <td>Processing pipeline, Python scripts, JSON generation, note taxonomy mapping</td>
+      <td>Exploratory data analysis, dataset selection, data quality assessment</td>
+    </tr>
+    <tr>
+      <td>Architecture</td>
+      <td>Website structure, scrollytelling setup with Scrollama and Lenis, lazy initialization system</td>
+      <td>Milestone reports (M1, M2), process book, testing across browsers</td>
+    </tr>
+    <tr>
+      <td>Visualizations</td>
+      <td>Beeswarm, radar charts, bubble chart, interactive heatmap</td>
+      <td>Chord diagram, Sankey diagram, timeline chart, price analysis</td>
+    </tr>
+    <tr>
+      <td>Design</td>
+      <td>CSS dark theme, responsive layout, typography, color system</td>
+      <td>Content writing for scroll steps, narrative structure, user flow</td>
+    </tr>
+  </table>
+
+  <h2>What We Would Do Differently</h2>
+
+  <p>
+    <strong>More user testing.</strong> We showed the site to a handful of classmates in the final week, but earlier feedback would have caught issues like the invisible grid lines and confusing axis labels sooner. Formal usability testing with 5 to 10 participants at the midpoint would have improved the final result noticeably.
+  </p>
+
+  <p>
+    <strong>An interactive perfume search.</strong> Our Milestone 2 stretch goals included a feature where the reader could type a perfume name and see its note profile as a radar chart. We dropped this in favor of the heatmap because it was simpler to build, but a search feature would have made the site feel more personal. Readers want to find their own perfume in the data.
+  </p>
+
+  <p>
+    <strong>Better mobile experience.</strong> The responsive layout works but feels like a fallback rather than a designed experience. A dedicated mobile version with simplified charts (perhaps static images with key annotations instead of full D3 interactivity) would serve phone users better. Scrollytelling is inherently a desktop pattern, and we should have planned for that constraint from the beginning.
+  </p>
+
+  <p>
+    <strong>Dataset enrichment.</strong> The eBay pricing data covers only about 2,000 listings, making the price analysis section our weakest link statistically. A larger e-commerce dataset or direct integration with retailer APIs would have strengthened that section considerably.
+  </p>
+
+  <h2>Conclusion</h2>
+
+  <p>
+    The Anatomy of Scent transforms 24,063 rows of perfume data into a story anyone can follow. Through eight interactive visualizations and a scroll driven narrative, we made the hidden structure of perfumery visible and explorable. The project taught us that the hardest part of data visualization is not the code or the data. It is choosing what to show, when to show it, and how much to let the reader discover on their own.
+  </p>
+</div>
+
+</body>
+</html>

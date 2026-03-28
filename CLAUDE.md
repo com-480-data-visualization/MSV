@@ -1,48 +1,44 @@
 # COM-480 Data Visualization — Perfume Project
 
 ## Overview
-Interactive data visualization exploring perfume composition, popularity, and market value.
+Interactive scrollytelling data visualization exploring perfume composition, popularity, and market value.
 Course: COM-480 Data Visualization at EPFL. Team: Alexandre Mourot, Gaël Conde Losada.
+Live: https://alexandre-mrt.github.io/com-480-dataviz/
 
 ## Stack
-- **Frontend**: Vanilla HTML/CSS/JS + D3.js v7
+- **Frontend**: Vanilla HTML/CSS/JS + D3.js v7 + Scrollama + Lenis
 - **Data**: Python (pandas) for preprocessing → JSON for D3.js
-- **Design**: Elegant/luxe dark theme, scrollytelling narrative
-- **Deployment**: GitHub Pages
+- **Design**: Dark luxury theme (#0a0a0a, #c9a96e gold, Cormorant Garamond)
+- **Deployment**: GitHub Pages (from /docs)
 
 ## Structure
 ```
-website/          # Main website (index.html, css/, js/, assets/)
-data/             # Raw datasets (CSV) and processed (JSON)
-  fragrantica/    # 24K perfumes: notes, ratings, gender, year, accords
-  perfume-ecommerce/  # eBay pricing data (men + women)
-  json/           # D3.js-ready JSON files
-milestones/       # Milestone documents and figures
-src/              # Python scripts for EDA and data processing
+docs/             # Deployable website (GitHub Pages source)
+  index.html      # Scrollytelling main page
+  css/style.css   # Dark luxury theme
+  js/main.js      # Scrollama setup, shared utilities
+  js/visualizations/  # 8 D3.js visualization modules
+  data/           # Pre-processed JSON for D3.js
+data/             # Raw CSV datasets
+  fragrantica/    # 24K perfumes (semicolon-sep, latin-1)
+  perfume-ecommerce/  # eBay pricing
+  json/           # Canonical processed JSON
+milestones/       # Milestone docs + process book
+src/              # Python preprocessing scripts
 ```
 
 ## Dev Commands
 ```bash
-# Local dev server
-cd website && python3 -m http.server 8000
-
-# Data processing
-cd src && python3 process_data.py
-
-# Lint/format (if using)
-npx prettier --write website/
+cd docs && python3 -m http.server 8000
+cd src && python3 compute_advanced_data.py
 ```
 
-## Key Datasets
-- `fra_cleaned.csv`: semicolon-separated, latin-1 encoding, 18 columns
-- `ebay_mens_perfume.csv` / `ebay_womens_perfume.csv`: comma-separated
-
-## Visualizations
-1. Note Explorer (chord diagram) — note co-occurrence
-2. Gender Comparison — men vs women fragrance profiles
-3. Rating Bubbles — note frequency vs avg rating
-4. Temporal Trends — note popularity by decade
-5. Perfume Radar — individual perfume profiles
-6. Price Analysis — eBay pricing vs composition
-7. Note Flow Sankey — top → middle → base layers
-8. Interactive Heatmap — gender × note frequency
+## Visualizations (8 total)
+1. Beeswarm — note frequency constellation (force-directed)
+2. Radar — gender comparison (women vs men profiles)
+3. Bubbles — frequency vs rating scatter
+4. Timeline — stacked area (note family trends by decade)
+5. Price — eBay strip chart by gender
+6. Chord — note co-occurrence connections
+7. Sankey — top → middle → base note flow
+8. Heatmap — accord frequency by gender with sorting
