@@ -166,8 +166,9 @@
         }).strength(0.9))
         .force('x', d3.forceX(cx).strength(0.03))
         .force('y', d3.forceY(cy).strength(0.03))
-        .alphaDecay(0.02)
-        .on('tick', ticked);
+        .alphaDecay(0.03)
+        .on('tick', ticked)
+        .on('end', function () { simulation.stop(); });
 
       // Create bubble groups
       bubbleGroups = g.selectAll('.bubble-group')

@@ -463,9 +463,11 @@
         });
       });
 
-      // Resize handler
+      // Resize handler (debounced)
+      var resizeTimer;
       window.addEventListener('resize', function () {
-        render(currentSort);
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function () { render(currentSort); }, 250);
       });
 
     }).catch(function (err) {

@@ -5,18 +5,7 @@
 (function () {
   'use strict';
 
-  // ── Lenis smooth scroll ──
-  const lenis = new Lenis({
-    duration: 1.2,
-    easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
-    smoothWheel: true,
-  });
-
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
-  requestAnimationFrame(raf);
+  // Lenis removed — was causing scroll lag. Native smooth scroll via CSS instead.
 
   // ── Navigation show/hide ──
   var nav = document.getElementById('nav');
@@ -91,7 +80,9 @@
       .attr('fill', '#c9a96e')
       .attr('opacity', function (d) { return d.opacity; });
 
+    var heroAnimating = true;
     function animate() {
+      if (!heroAnimating) return;
       particles.forEach(function (p) {
         p.x += p.vx;
         p.y += p.vy;
@@ -107,6 +98,13 @@
       requestAnimationFrame(animate);
     }
     animate();
+
+    // Pause when hero is off-screen
+    var heroObserver = new IntersectionObserver(function (entries) {
+      heroAnimating = entries[0].isIntersecting;
+      if (heroAnimating) animate();
+    });
+    heroObserver.observe(document.getElementById('hero'));
   }
 
   // ── Scrollama setup for each section ──
@@ -144,9 +142,13 @@
     scrollamaInstances.push(scroller);
   }
 
-  // ── Resize handling ──
+  // ── Resize handling (debounced) ──
+  var scrollamaResizeTimer;
   window.addEventListener('resize', function () {
-    scrollamaInstances.forEach(function (s) { s.resize(); });
+    clearTimeout(scrollamaResizeTimer);
+    scrollamaResizeTimer = setTimeout(function () {
+      scrollamaInstances.forEach(function (s) { s.resize(); });
+    }, 200);
   });
 
   // ── Global tooltip ──

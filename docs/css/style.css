@@ -498,10 +498,14 @@ strong {
     flex-direction: column;
   }
 
+  .scrolly-graphic {
+    width: 100%;
+  }
+
   .scrolly-graphic.sticky {
     position: relative;
     top: auto;
-    height: 50vh;
+    height: 60vh;
     margin-bottom: 2rem;
   }
 
