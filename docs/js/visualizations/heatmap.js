@@ -328,34 +328,40 @@
             window.hideTooltip();
           });
 
-        // ── Click: expand row with cooccurrence breakdown ──
+        // ── Click: expand row with cooccurrence breakdown (HTML, outside SVG) ──
         var expandedAccord = null;
-        var expansionGroup = g.append('g').attr('class', 'expansion-area');
+        var expansionDiv = document.createElement('div');
+        expansionDiv.className = 'heatmap-expansion';
+        expansionDiv.style.cssText = 'display:none;background:rgba(17,17,17,0.95);border:1px solid rgba(201,169,110,0.25);border-radius:8px;padding:16px 24px 24px;margin-top:16px;max-width:' + totalWidth + 'px;margin-left:auto;margin-right:auto;';
+        // Insert AFTER the container (not inside it) to avoid flex layout issues
+        container.parentNode.insertBefore(expansionDiv, container.nextSibling);
+
+        function collapseExpansion() {
+          expandedAccord = null;
+          expansionDiv.style.display = 'none';
+          expansionDiv.innerHTML = '';
+          cells.attr('stroke', CELL_BORDER_COLOR).attr('stroke-width', 1);
+        }
 
         cells.on('click', function (event, d) {
           event.stopPropagation();
           var clickedAccord = d.accord;
 
           if (expandedAccord === clickedAccord) {
-            // Collapse
-            expandedAccord = null;
-            expansionGroup.selectAll('*').remove();
-            svg.attr('height', totalHeight);
-            cells.attr('stroke', CELL_BORDER_COLOR).attr('stroke-width', 1);
+            collapseExpansion();
             return;
           }
 
           expandedAccord = clickedAccord;
-          expansionGroup.selectAll('*').remove();
 
-          // Highlight the clicked row
+          // Highlight clicked row
           cells.each(function (cd) {
             d3.select(this)
               .attr('stroke', cd.accord === clickedAccord ? ACCENT_GOLD : CELL_BORDER_COLOR)
               .attr('stroke-width', cd.accord === clickedAccord ? 2 : 1);
           });
 
-          // Find cooccurrence data for this accord
+          // Find cooccurrence data
           var coocs = (raw.cooccurrence || [])
             .filter(function (c) {
               return c.accord1 === clickedAccord || c.accord2 === clickedAccord;
@@ -369,111 +375,37 @@
             .sort(function (a, b) { return b.count - a.count; })
             .slice(0, 8);
 
-          if (coocs.length === 0) return;
+          if (coocs.length === 0) { collapseExpansion(); return; }
 
-          // Position expansion below ALL rows (not just clicked row)
-          var expandY = accordNames.length * cellHeight + 10;
-          var barHeight = 20;
-          var barGap = 4;
-          var expandHeight = coocs.length * (barHeight + barGap) + 30;
+          var maxCooc = coocs[0].count;
 
-          // Background panel
-          expansionGroup.append('rect')
-            .attr('x', -MARGIN.left + 10)
-            .attr('y', expandY)
-            .attr('width', totalWidth - 20)
-            .attr('height', expandHeight)
-            .attr('rx', 4)
-            .attr('fill', 'rgba(17,17,17,0.95)')
-            .attr('stroke', 'rgba(201,169,110,0.2)')
-            .attr('stroke-width', 1);
+          // Build HTML expansion panel
+          var html = '<div style="font-size:10px;font-family:' + FONT_BODY + ';color:' + ACCENT_GOLD + ';letter-spacing:0.08em;margin-bottom:12px;">TOP CO-OCCURRING ACCORDS WITH ' + clickedAccord.toUpperCase() + '</div>';
 
-          // Title
-          expansionGroup.append('text')
-            .attr('x', 0)
-            .attr('y', expandY + 14)
-            .attr('font-size', '10px')
-            .attr('font-family', FONT_BODY)
-            .attr('fill', ACCENT_GOLD)
-            .attr('letter-spacing', '0.05em')
-            .text('TOP CO-OCCURRING ACCORDS WITH ' + clickedAccord.toUpperCase());
+          coocs.forEach(function (c) {
+            var pct = Math.round((c.count / maxCooc) * 100);
+            html += '<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">' +
+              '<span style="width:90px;text-align:right;font-size:11px;font-family:' + FONT_HEADING + ';color:' + LABEL_COLOR + ';">' + capitalize(c.partner) + '</span>' +
+              '<div style="flex:1;height:22px;background:rgba(255,255,255,0.04);border-radius:3px;overflow:hidden;">' +
+              '<div style="width:' + pct + '%;height:100%;background:' + COLOR_MID + ';border-radius:3px;transition:width 0.6s ease;"></div>' +
+              '</div>' +
+              '<span style="width:50px;font-size:10px;font-family:' + FONT_BODY + ';color:' + LABEL_COLOR + ';">' + formatNumber(c.count) + '</span>' +
+              '</div>';
+          });
 
-          // Bar scale
-          var maxCooc = d3.max(coocs, function (c) { return c.count; });
-          var barMaxWidth = cellWidth * GENDERS.length - 60;
-          var barScale = d3.scaleLinear()
-            .domain([0, maxCooc])
-            .range([0, barMaxWidth]);
+          expansionDiv.innerHTML = html;
+          expansionDiv.style.display = 'block';
 
-          // Bars
-          var barGroups = expansionGroup.selectAll('.cooc-bar')
-            .data(coocs)
-            .join('g')
-            .attr('class', 'cooc-bar')
-            .attr('transform', function (c, i) {
-              return 'translate(0,' + (expandY + 22 + i * (barHeight + barGap)) + ')';
-            });
-
-          barGroups.append('text')
-            .attr('x', -10)
-            .attr('y', barHeight / 2)
-            .attr('text-anchor', 'end')
-            .attr('dominant-baseline', 'middle')
-            .attr('font-size', '10px')
-            .attr('font-family', FONT_HEADING)
-            .attr('fill', LABEL_COLOR)
-            .text(function (c) { return capitalize(c.partner); });
-
-          barGroups.append('rect')
-            .attr('x', 0)
-            .attr('y', 0)
-            .attr('width', 0)
-            .attr('height', barHeight)
-            .attr('rx', 2)
-            .attr('fill', COLOR_MID)
-            .attr('opacity', 0.7)
-            .transition()
-            .duration(TRANSITION_MS * 2)
-            .attr('width', function (c) { return barScale(c.count); });
-
-          barGroups.append('text')
-            .attr('x', function (c) { return barScale(c.count) + 6; })
-            .attr('y', barHeight / 2)
-            .attr('dominant-baseline', 'middle')
-            .attr('font-size', '9px')
-            .attr('font-family', FONT_BODY)
-            .attr('fill', LABEL_COLOR)
-            .attr('opacity', 0)
-            .text(function (c) { return formatNumber(c.count); })
-            .transition()
-            .delay(TRANSITION_MS)
-            .duration(TRANSITION_MS)
-            .attr('opacity', 0.8);
-
-          // Expand SVG to fit the expansion panel
-          var newHeight = MARGIN.top + expandY + expandHeight + 20;
-          if (newHeight > totalHeight) {
-            svg.attr('height', newHeight);
-          }
-
-          // Scroll the expansion into view
+          // Scroll into view
           setTimeout(function () {
-            var panel = expansionGroup.node();
-            if (panel) {
-              var rect = panel.getBoundingClientRect();
-              if (rect.bottom > window.innerHeight) {
-                window.scrollBy({ top: rect.bottom - window.innerHeight + 40, behavior: 'smooth' });
-              }
-            }
+            expansionDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
           }, 100);
         });
 
-        // Click outside to collapse expansion
-        svg.on('click', function () {
-          if (expandedAccord) {
-            expandedAccord = null;
-            expansionGroup.selectAll('*').remove();
-            svg.attr('height', totalHeight);
+        // Click outside to collapse
+        document.addEventListener('click', function (e) {
+          if (expandedAccord && !container.contains(e.target)) {
+            collapseExpansion();
           }
         });
       }
