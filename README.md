@@ -2,7 +2,7 @@
 
 An interactive data visualization exploring what makes a perfume attractive, how composition influences popularity, and what trends define modern perfumery.
 
-**Live site**: [GitHub Pages](https://alexandre-mrt.github.io/com-480-dataviz/)
+**Live site**: [com-480-dataviz.vercel.app](https://com-480-dataviz.vercel.app)
 
 | Student | SCIPER |
 | --- | --- |
