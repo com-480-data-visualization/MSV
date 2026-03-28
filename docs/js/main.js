@@ -19,17 +19,14 @@
   requestAnimationFrame(raf);
 
   // ── Navigation show/hide ──
-  const nav = document.getElementById('nav');
-  let lastScrollY = 0;
+  var nav = document.getElementById('nav');
 
   window.addEventListener('scroll', function () {
-    var scrollY = window.scrollY;
-    if (scrollY > window.innerHeight * 0.8) {
+    if (window.scrollY > window.innerHeight * 0.8) {
       nav.classList.add('visible');
     } else {
       nav.classList.remove('visible');
     }
-    lastScrollY = scrollY;
   });
 
   // ── Active nav link ──
@@ -166,6 +163,13 @@
 
   window.hideTooltip = function () {
     tooltip.classList.remove('visible');
+  };
+
+  // ── Shared text escaping utility (defense-in-depth against XSS) ──
+  window.escapeHtml = function (str) {
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
   };
 
   // ── Note family color scale (shared across visualizations) ─���
