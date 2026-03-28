@@ -280,18 +280,12 @@
         .attr('class', 'price-dot')
         .attr('cx', function (d) { return d._x; })
         .attr('cy', function (d) { return d._y; })
-        .attr('r', 0)
+        .attr('r', function (d) { return d._r; })
         .attr('fill', function (d) { return getTypeColor(d.type); })
         .attr('fill-opacity', DOT_DEFAULT_OPACITY)
         .attr('stroke', 'none')
         .attr('stroke-width', 0)
         .style('cursor', 'pointer');
-
-      // Animate dots in
-      dots.transition()
-        .duration(TRANSITION_DURATION)
-        .delay(function (d, i) { return i * 0.5; })
-        .attr('r', function (d) { return d._r; });
 
       // ── Hover interactions ──
       dots.on('mouseenter', function (event, d) {
@@ -440,7 +434,7 @@
 
     function showAllDots() {
       if (!dots) return;
-      dots.transition()
+      dots.transition('highlight')
         .duration(TRANSITION_DURATION)
         .attr('fill-opacity', DOT_DEFAULT_OPACITY)
         .attr('stroke', 'none')
@@ -466,7 +460,7 @@
         el.attr('data-premium', isPremium ? 'true' : 'false')
           .attr('data-opacity', isPremium ? 0.9 : DOT_DIM_OPACITY);
 
-        el.transition()
+        el.transition('highlight')
           .duration(TRANSITION_DURATION)
           .attr('fill-opacity', isPremium ? 0.9 : DOT_DIM_OPACITY)
           .attr('stroke', isPremium ? PREMIUM_STROKE_COLOR : 'none')

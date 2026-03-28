@@ -20,7 +20,7 @@
   var FONT_SIZE_COLUMN = '12px';
   var FONT_FAMILY_LABEL = 'DM Sans, sans-serif';
   var FONT_FAMILY_COLUMN = 'Cormorant Garamond, Georgia, serif';
-  var MARGIN = { top: 30, right: 20, bottom: 10, left: 20 };
+  var MARGIN = { top: 30, right: 80, bottom: 10, left: 80 };
   var LAYER_NAMES = ['Top Notes', 'Middle Notes', 'Base Notes'];
   var LAYER_KEYS = ['topNotes', 'middleNotes', 'baseNotes'];
 
