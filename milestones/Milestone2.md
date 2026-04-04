@@ -1,98 +1,79 @@
-# Milestone 2: The Anatomy of Scent
+# Milestone 2 — The Anatomy of Scent
 
-**COM-480 Data Visualization, EPFL**
-Alexandre Mourot (346365), Gaël Conde Losada (329871)
+**COM-480 Data Visualization** | Alexandre Mourot (346365), Gaël Conde Losada (329871)
 
 ## Project Goal
 
-We are building a scrollytelling website that explores what makes a perfume attractive. The central question is simple: why do some fragrances succeed while others fade into obscurity? Our dataset, drawn from Fragrantica (24,063 perfumes) and eBay pricing data, gives us the raw material to answer that. The site will walk the reader through perfume composition, note patterns, gender preferences, temporal trends, and market pricing, all through interactive D3.js visualizations.
+Our project tells the story of what goes into a perfume and why some compositions work better than others. We use the Fragrantica dataset (about 24,000 perfumes with notes, ratings, accords, gender, release year) together with an eBay pricing dataset (~2,000 listings) to look at this from multiple angles: what notes are most common, how men's and women's perfumes differ, whether popular notes are actually well-rated, how trends shifted over the decades, and what drives price differences.
 
-We want the site to feel like walking into a high end perfume boutique. Dark background, refined typography, gold accents. The kind of website where the design itself tells you "this is about something beautiful." We are not building a dashboard. We are telling a story, section by section, as the reader scrolls.
-
-Our target audience sits at the intersection of three groups: perfume enthusiasts who want to see their passion through a data lens, data visualization lovers who enjoy well crafted interactive storytelling, and curious people who have never thought about why bergamot shows up in nearly every fragrance they own. We want to surprise all three.
+We chose to build it as a scrollytelling site because it fits naturally: each section is one question, one visualization, one piece of the story. The reader does not need to click around or figure out filters, they just scroll and the data unfolds. Design-wise we are going for a dark luxurious look with gold highlights and serif fonts (Cormorant Garamond) to give a sense of elegance that matches the subject. Think of it as something closer to a magazine feature than a data dashboard.
 
 ## Visualization Sketches
 
-The website is structured as five scrollytelling sections. Each section introduces a new angle on the data and a new visualization.
+We plan five main sections, each built around one D3.js visualization. Below we describe what each one shows and roughly what it looks like.
 
-**Section 1: "The Building Blocks"** opens with a beeswarm chart. Each bubble represents a fragrance note, sized by how often it appears across all 24,000 perfumes. The bubbles float upward like scent molecules, clustered by note family (floral, woody, citrus, spicy). Hovering reveals the exact count and top brands using that note. We took direct inspiration from the "Fragrance of Data" project that won recognition at the Information is Beautiful Awards.
+**Section 1 — "The Building Blocks" (Beeswarm Chart)**
+The opening view is a constellation of bubbles, one per fragrance note, sized by frequency across the full dataset. We group them by family (floral, woody, citrus, etc.) using D3 force simulation. Hovering shows the count and top brands. This gives the reader an immediate sense of scale: musk appears in 11,000+ perfumes, but a note like pink pepper only shows up in a few hundred.
 
-```
-        o          O = note bubble (size = frequency)
-     O     o       Clusters by family:
-   o    O    o       [Floral]  [Woody]  [Citrus]  [Spicy]
-  O   o   O   o
- o  O   o   O  o   Hover -> tooltip with note details
-________________________
-```
+![Beeswarm sketch](figures/m2/beeswarm_sketch.png)
 
-**Section 2: "His and Hers"** uses side by side radar charts comparing men's and women's fragrance profiles. The radar axes represent the top 8 note families. This is where the data gets interesting: musk and bergamot dominate both genders, but jasmine and rose skew heavily feminine while patchouli and cedar lean masculine. A toggle lets the user add "unisex" as a third overlay.
+**Section 2 — "His & Hers" (Radar Charts)**
+Two radar charts side by side, one for women and one for men, with 8 axes (one per note family). We already saw in our EDA that jasmine/rose dominate women's perfumes while patchouli/cedar lean masculine. The radar makes this immediately visible. A toggle button lets you overlay the "unisex" profile as a third layer.
 
-```
-     Floral                    Floral
-    /     \                   /     \
-Citrus --- Woody         Citrus --- Woody
-    \     /                   \     /
-     Spicy                    Spicy
-   [ WOMEN ]               [ MEN ]
-```
+![Radar sketch](figures/m2/radar_sketch.png)
 
-**Section 3: "The Ratings Game"** is a bubble chart mapping note frequency (x axis) against average user rating (y axis), with bubble size encoding the number of perfumes containing that note. This reveals whether popular notes are actually well rated or just common. Pink pepper and tonka bean, for instance, appear in fewer perfumes but carry surprisingly high average scores.
+**Section 3 — "The Ratings Game" (Bubble Chart)**
+Note frequency on the x-axis, average user rating on the y-axis, bubble size = perfume count. The interesting finding here is that the most common notes do not necessarily rate the highest. Tonka bean and pink pepper sit in a sweet spot of high rating and lower frequency, while musk is everywhere but unremarkable rating-wise.
 
-```
-  Rating
-  4.0 |        o (pink pepper)
-      |    O        o (tonka bean)
-  3.9 | O     O
-      |  O  O   O
-  3.8 |________________
-       0   2000  5000  8000
-           Frequency -->
-```
+![Bubble sketch](figures/m2/bubble_sketch.png)
 
-**Section 4: "Fifty Years of Fragrance"** shows a stacked area chart of note popularity by decade, from the 1970s to today. The reader scrolls through time and watches aldehydes fade while oud and tonka bean rise. This section connects perfumery to cultural shifts: the clean fresh era of the 1990s, the gourmand explosion of the 2010s.
+**Section 4 — "Fifty Years of Fragrance" (Stacked Area)**
+A stacked area chart of note family proportions by decade (1970s to 2020s). We want the reader to scroll forward through time and see how olfactory tastes changed: the fresh clean wave of the 90s, the gourmand rise of the 2010s, oud gaining ground recently. This one requires computing decade bins and normalizing note counts per period.
 
-```
-  100% |::::::::::::::::
-       |:::woody::::::::
-       |:::::::floral:::
-       |::citrus::::::::
-    0% |________________
-       1970  1990  2010  2020
-```
+![Stacked area sketch](figures/m2/stacked_area_sketch.png)
 
-**Section 5: "The Price of Scent"** merges our eBay pricing data. A scatter plot positions perfumes by composition profile (x axis, derived from accord similarity) and price (y axis). This is the trickiest visualization because the eBay dataset only covers about 2,000 listings and brand names do not always match cleanly. We plan to use fuzzy matching on brand names to connect the two datasets.
+**Section 5 — "The Price of Scent" (Strip Chart)**
+Using the eBay dataset, a strip/beeswarm plot of prices split by gender. Men's listings range from $3 to $259, women's from $2 to $300. The tricky part is matching eBay listings to Fragrantica entries since naming conventions differ. We plan to use fuzzy string matching on brand names, but this is still a work in progress and may not give perfect results.
 
-Two additional visualizations appear as interactive sidebars throughout the experience. A chord diagram shows which notes tend to appear together across top, middle, and base layers. And a Sankey diagram traces the flow from top notes through middle notes down to base notes, revealing the most common structural "recipes" in perfumery.
+![Price strip sketch](figures/m2/price_strip_sketch.png)
 
-```
-  Chord Diagram              Sankey Flow
-  Bergamot ---+              TOP    MID    BASE
-  Musk -------+--- Rose      Berg-->Jas-->Musk
-  Jasmine ----+              Lem--->Rose-->Sand
-  Sandalwood--+              Lav--->Iris-->Amb
-```
+We are also considering two sidebar visualizations (a chord diagram for note co-occurrences and a Sankey diagram for the top-middle-base note flow), but these are not guaranteed at this point.
 
-## Tools and Relevant Lectures
+## Tools and Lectures
 
-All visualizations will be built with **D3.js v7**, the standard library for custom interactive data visualization on the web. We chose D3 over higher level alternatives (Plotly, Chart.js) because we need full control over animations, scroll triggers, and custom layouts like the beeswarm and Sankey.
+| Visualization | Main tool | Relevant lectures |
+|---|---|---|
+| Beeswarm | D3.js force simulation | D3.js bindng, Interaction design |
+| Radar charts | D3.js radial scales + SVG | Perception and color, Marks & channels |
+| Bubble chart | D3.js scatterplot | Tabular data, Marks & channels |
+| Stacked area | D3.js stack + area generator | Time series, Storytelling |
+| Price strip chart | D3.js force jitter | Tabular data, Interaction design |
+| Scroll framework | Scrollama (IntersectionObserver) | Storytelling with data |
+| Data preprocessing | Python + pandas | — |
+| Hosting | GitHub Pages | — |
 
-For scroll driven interactions, we use **Scrollama**, a lightweight library built on the IntersectionObserver API that triggers visualization transitions as elements enter the viewport. Smooth scrolling is handled by **Lenis**, which has become the standard for momentum scrolling in 2025/2026. The site itself is vanilla HTML, CSS, and JavaScript with no frontend framework. Data preprocessing (parsing notes, grouping categories, computing aggregates) was done in Python with **pandas**, and the cleaned data is served as static JSON files.
+We use vanilla HTML/CSS/JS with no build step or framework, which keeps the project simple but means we handle state ourselves. Smooth scrolling is handled by Lenis.
 
-The site will be hosted on **GitHub Pages**, which requires zero server infrastructure.
+## Implementation Breakdown
 
-From the course lectures, we will draw on: the D3.js lectures (bindng data to DOM, scales, transitions), the interaction design lecture (hover states, filtering, linked views), color theory and perception (choosing palettes that work on dark backgrounds), and the storytelling lecture (narrative structure, pacing, the scrollytelling pattern).
+### Core (the story works with just these)
 
-## Core MVP vs. Stretch Goals
+- Scrollytelling skeleton with section navigation and Scrollama triggers
+- Beeswarm chart (Section 1): the entry point, introduces the dataset
+- Radar charts (Section 2): gender comparison, the most narratively compelling part
+- Bubble chart (Section 3): directly answers "what makes a note popular vs. well-rated"
+- Hover tooltips and smooth transitions everywhere
 
-We split the project into what must ship and what would be great to have. This way, if time runs short, we still deliver a coherent product.
+### Stretch goals (ordered by how much they add)
 
-**Core (the story must stand on its own with just these):**
+1. Stacked area chart — temporal trends give historical context
+2. Chord diagram — note pairings, visually impressive
+3. Sankey diagram — compositional structure from top to base
+4. Price strip chart — depends on dataset matching quality
+5. Perfume search — type a name, see its profile highlighted
 
-The scrollytelling skeleton with five narrative sections. The beeswarm chart of note frequency, which anchors the opening. The gender comparison radar charts, because the his/hers angle is our strongest narrative hook. The rating bubble chart, which answers the core question of "what makes a perfume popular." And basic interactivity everywhere: hover tooltips, smooth transitions between sections, a filter by gender toggle.
+If time runs short, sections 1 through 3 with the scroll skeleton already tell a complete story. Sections 4 and 5 add depth but are not critical to the main message.
 
-**Stretch goals (each one enhances the story but could be dropped):**
+## Functional Prototype
 
-The chord diagram showing note co occurrences. The Sankey diagram tracing note flows from top to base. The temporal trends animation. The eBay price analysis scatter plot (this depends on how well we can match datasets). And finally, a perfume search feature where the reader types a fragrance name and sees its note profile as a radar chart.
-
-We are confident the core is achievable in the remaining time. The stretch goals are ordered by impact: the chord diagram and Sankey add the most visual richness, while the search feature is more of a fun bonus.
+The current prototype is running at **https://com-480-data-visualization.github.io/MSV/**. It includes the scrollytelling skeleton, the dark theme with section navigation, and the first two core visualizations (beeswarm and radar) in working interactive form. The other sections show placeholder containers that we will fill progressively.
