@@ -32,7 +32,15 @@ We have five main sections planned. Here is what each one does and what it shoul
 
 ![Price strip sketch](figures/m2/price_strip_sketch.png)
 
-On top of these five sections we might add a chord diagram showing which notes tend to co-occur and a Sankey diagram tracing the flow from top notes through middle to base. These two are not guaranteed though, they depend on how much time we have left.
+Beyond the five main sections, we have a few more ideas we would like to explore if time allows.
+
+A **chord diagram** showing which notes tend to co-occur across perfumes. The 15 or so most common notes would form the outer ring, and the arcs between them would encode how often two notes appear together in the same composition. This could reveal some non-obvious pairings that perfumers rely on but consumers never think about.
+
+A **Sankey diagram** tracing the flow from top notes through middle notes down to base notes. Perfumes have a layered structure (what you smell first, what develops over time, what lingers) and we think a Sankey would be a great way to show the most common "recipes" or compositional paths.
+
+An **interactive heatmap of accords by gender**. The Fragrantica dataset has five accord fields per perfume (woody, floral, fresh, sweet, citrus, etc.) and we could build a heatmap with accords as rows, gender categories as columns, and color intensity encoding frequency. Adding interactive sorting (by total frequency, by gender skew) and maybe an expandable detail panel when you click a row would let the reader really dig into the data. This one is ambitious but the accord data is already structured in the dataset so the preprocessing would be straightforward.
+
+We could also think about a **"Deep Dive" section** at the end that groups some of these exploratory visualizations (chord, Sankey, heatmap) together as a set of interactive cards the reader can pick from, rather than forcing a linear scroll through all of them. This way the main narrative stays tight (sections 1 through 5) and the deep dive is there for people who want to explore further on their own.
 
 ## Tools and Lectures
 
@@ -43,6 +51,9 @@ On top of these five sections we might add a chord diagram showing which notes t
 | Bubble chart | D3.js scatterplot | Tabular data, Marks & channels |
 | Stacked area | D3.js stack + area generator | Time series, Storytelling |
 | Price strip chart | D3.js force jitter | Tabular data, Interaction design |
+| Chord diagram | D3.js chord layout | Perception and color, Interaction design |
+| Sankey diagram | D3.js + d3-sankey | Marks & channels, Storytelling |
+| Accord heatmap | D3.js color scales + grid | Tabular data, Perception and color |
 | Scroll framework | Scrollama (IntersectionObserver) | Storytelling with data |
 | Data preprocessing | Python + pandas | n/a |
 | Hosting | GitHub Pages | n/a |
@@ -57,7 +68,7 @@ The story needs to work with just the scrollytelling skeleton, the beeswarm (sec
 
 ### Stretch goals
 
-The stacked area chart (section 4) would add a historical dimension that makes the story richer. After that, a chord diagram and a Sankey diagram would bring visual depth by showing how notes connect to each other and flow through the three layers of a perfume. The price strip chart (section 5) is interesting but its quality depends entirely on how well we can match the two datasets, so we are not committing to it yet. Last, a perfume search feature where you type a name and see its profile pop up across the visualizations would be a nice touch if we get to it.
+The stacked area chart (section 4) would add a historical dimension that makes the story richer. The price strip chart (section 5) is interesting but its quality depends entirely on how well we can match the two datasets, so we are not committing to it yet. After those, a chord diagram and a Sankey diagram would bring visual depth by showing how notes connect to each other and flow through the three layers of a perfume. We are also quite excited about the accord heatmap idea because it would give the reader a completely different lens on the data, looking at higher level scent profiles rather than individual notes, and the interactive sorting could make it genuinely useful for someone trying to understand what separates a "woody oriental" from a "floral aquatic." If we manage to build all of these, a deep dive section grouping them as interactive cards at the end of the site would be a clean way to keep the main story focused while still offering exploration. Last, a perfume search feature where you type a name and see its profile highlighted across all the visualizations would be a nice touch if we get to it.
 
 ## Functional Prototype
 
