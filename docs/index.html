@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Anatomy of Scent — A Perfume Data Story</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav-brand">The Anatomy of Scent</div>
+    <div class="nav-links">
+      <a href="#hero">Home</a>
+      <a href="#section-building-blocks">Notes</a>
+      <a href="#section-his-hers">Gender</a>
+      <a href="#section-ratings">Ratings</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="hero-particles" id="hero-particles"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">A Data Visualization Story</p>
+      <h1 class="hero-title">The Anatomy<br>of Scent</h1>
+      <p class="hero-subtitle">Exploring 24,000 perfumes to uncover what makes a fragrance irresistible</p>
+      <div class="hero-scroll-indicator">
+        <span>Scroll to explore</span>
+        <div class="scroll-arrow"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: The Building Blocks -->
+  <section class="story-section" id="section-building-blocks">
+    <div class="section-intro">
+      <span class="section-number">01</span>
+      <h2 class="section-title">The Building Blocks</h2>
+      <p class="section-description">
+        Every perfume is built from layers of fragrance notes. Some notes appear in thousands
+        of compositions. Others are rare signatures. Here are the molecules that define modern perfumery.
+      </p>
+    </div>
+    <div class="scrolly" id="scrolly-beeswarm">
+      <div class="scrolly-graphic sticky">
+        <div class="viz-container" id="viz-beeswarm"></div>
+      </div>
+      <div class="scrolly-steps">
+        <div class="step" data-step="1">
+          <p>Across 24,063 perfumes, <strong>musk</strong> is the undisputed champion, appearing in over 11,000 compositions. It is the invisible thread that ties modern perfumery together.</p>
+        </div>
+        <div class="step" data-step="2">
+          <p><strong>Bergamot</strong> follows closely. This citrus note opens nearly every classical cologne and most modern feminines. It is the first impression you never consciously notice.</p>
+        </div>
+        <div class="step" data-step="3">
+          <p>The top 10 notes tell a story of balance: warm bases like <strong>sandalwood</strong> and <strong>amber</strong>, green freshness from <strong>bergamot</strong> and <strong>lemon</strong>, and florals like <strong>jasmine</strong> and <strong>rose</strong>.</p>
+        </div>
+        <div class="step" data-step="4">
+          <p>But beyond the usual suspects, hundreds of niche notes create the magic. Explore the full constellation below.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: His and Hers -->
+  <section class="story-section" id="section-his-hers">
+    <div class="section-intro">
+      <span class="section-number">02</span>
+      <h2 class="section-title">His &amp; Hers</h2>
+      <p class="section-description">
+        The perfume industry draws sharp lines between masculine and feminine fragrances.
+        But do the actual ingredients tell the same story?
+      </p>
+    </div>
+    <div class="scrolly" id="scrolly-radar">
+      <div class="scrolly-graphic sticky">
+        <div class="viz-container" id="viz-radar"></div>
+      </div>
+      <div class="scrolly-steps">
+        <div class="step" data-step="1">
+          <p>Women's perfumes lean heavily into <strong>floral</strong> territory: jasmine, rose, and lily of the valley dominate the middle notes.</p>
+        </div>
+        <div class="step" data-step="2">
+          <p>Men's fragrances pivot toward <strong>woody and earthy</strong> profiles. Patchouli, cedar, and vetiver form the backbone of masculine scent.</p>
+        </div>
+        <div class="step" data-step="3">
+          <p>But the real surprise? <strong>Musk and bergamot</strong> are nearly equal across genders. These are the universal building blocks of fragrance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: The Ratings Game -->
+  <section class="story-section" id="section-ratings">
+    <div class="section-intro">
+      <span class="section-number">03</span>
+      <h2 class="section-title">The Ratings Game</h2>
+      <p class="section-description">
+        Does popularity equal quality? We mapped how often each note appears
+        against its average user rating to find out.
+      </p>
+    </div>
+    <div class="scrolly" id="scrolly-bubbles">
+      <div class="scrolly-graphic sticky">
+        <div class="viz-container" id="viz-bubbles"></div>
+      </div>
+      <div class="scrolly-steps">
+        <div class="step" data-step="1">
+          <p>The most common notes hover around the same rating. Being ubiquitous does not guarantee being loved.</p>
+        </div>
+        <div class="step" data-step="2">
+          <p>Look at the upper left: <strong>pink pepper</strong> and <strong>tonka bean</strong> appear in fewer perfumes but carry some of the highest average ratings. Rarity and quality often travel together.</p>
+        </div>
+        <div class="step" data-step="3">
+          <p>The sweet spot? Notes that are both reasonably common and well rated. <strong>Amber</strong>, <strong>vanilla</strong>, and <strong>sandalwood</strong> sit right in that zone.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Fifty Years of Fragrance (Coming Soon) -->
+  <section class="story-section" id="section-timeline">
+    <div class="section-intro">
+      <span class="section-number">04</span>
+      <h2 class="section-title">Fifty Years of Fragrance</h2>
+      <p class="section-description">
+        Perfume trends mirror cultural shifts. From the aldehydic glamour of the 1970s
+        to the gourmand explosion of the 2010s, the data traces a half century of changing tastes.
+      </p>
+    </div>
+    <div class="viz-container viz-placeholder">
+      <div class="placeholder-content">
+        <span class="placeholder-icon">&#x27E1;</span>
+        <p>Visualization in progress</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: The Price of Scent (Coming Soon) -->
+  <section class="story-section" id="section-price">
+    <div class="section-intro">
+      <span class="section-number">05</span>
+      <h2 class="section-title">The Price of Scent</h2>
+      <p class="section-description">
+        Using eBay listing data, we explore how composition relates to market value.
+        Does a particular note profile command a higher price?
+      </p>
+    </div>
+    <div class="viz-container viz-placeholder">
+      <div class="placeholder-content">
+        <span class="placeholder-icon">&#x27E1;</span>
+        <p>Visualization in progress</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p class="footer-title">The Anatomy of Scent</p>
+      <p class="footer-credits">
+        A COM-480 Data Visualization project at EPFL<br>
+        Alexandre Mourot &amp; Ga&euml;l Conde Losada
+      </p>
+      <p class="footer-data">
+        Data sources:
+        <a href="https://www.kaggle.com/datasets/olgagmiufana1/fragrantica-com-fragrance-dataset" target="_blank" rel="noopener noreferrer">Fragrantica Dataset</a> &amp;
+        <a href="https://www.kaggle.com/datasets/kanchana1990/perfume-e-commerce-dataset-2024" target="_blank" rel="noopener noreferrer">eBay Perfume Dataset</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+  <script src="https://unpkg.com/scrollama@3.2.0/build/scrollama.min.js"></script>
+  <script src="js/visualizations/beeswarm.js"></script>
+  <script src="js/visualizations/radar.js"></script>
+  <script src="js/visualizations/bubbles.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
