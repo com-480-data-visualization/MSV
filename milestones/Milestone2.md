@@ -81,7 +81,7 @@ For scroll driven interactions, we use **Scrollama**, a lightweight library buil
 
 The site will be hosted on **GitHub Pages**, which requires zero server infrastructure.
 
-From the course lectures, we will draw on: the D3.js lectures (bindng data to DOM, scales, transitions), the interaction design lecture (hover states, filtering, linked views), color theory and perception (choosing palettes that work on dark backgrounds), and the storytelling lecture (narrative structure, pacing, the scrollytelling pattern).
+From the course lectures, we will draw on: **D3.js** (binding data to DOM, scales, axes, transitions), **Interactions** and **Interactive D3** (hover states, filtering, brushing, linked views), **Perception of Colors** (choosing palettes that work on dark backgrounds, ensuring accessibility), **Marks and Channels** (mapping data attributes to appropriate visual encodings), and **Designing Viz** / **Do and Don't in Viz** (design process, avoiding misleading charts, clarity over decoration). The **Data** lectures informed our preprocessing pipeline, and **Javascript Part 1 & 2** grounded the vanilla JS architecture we chose over a framework.
 
 ## Core MVP vs. Stretch Goals
 
