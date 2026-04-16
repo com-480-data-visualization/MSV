@@ -42,6 +42,25 @@ An **interactive heatmap of accords by gender**. The Fragrantica dataset has fiv
 
 We could also think about a **"Deep Dive" section** at the end that groups some of these exploratory visualizations (chord, Sankey, heatmap) together as a set of interactive cards the reader can pick from, rather than forcing a linear scroll through all of them. This way the main narrative stays tight (sections 1 through 5) and the deep dive is there for people who want to explore further on their own.
 
+## Tools and Lectures
+
+| Visualization | Main tool | Relevant lectures |
+|---|---|---|
+| Beeswarm | D3.js force simulation | D3.js binding, Interaction design |
+| Radar charts | D3.js radial scales + SVG | Perception and color, Marks & channels |
+| Bubble chart | D3.js scatterplot | Tabular data, Marks & channels |
+| Stacked area | D3.js stack + area generator | Time series, Storytelling |
+| Price strip chart | D3.js force jitter | Tabular data, Interaction design |
+| Chord diagram | D3.js chord layout | Perception and color, Interaction design |
+| Sankey diagram | D3.js + d3-sankey | Marks & channels, Storytelling |
+| Accord heatmap | D3.js color scales + grid | Tabular data, Perception and color |
+| Scroll framework | Scrollama (IntersectionObserver) | Storytelling with data |
+| Data preprocessing | Python + pandas | n/a |
+| Hosting | GitHub Pages | n/a |
+
+Everything is vanilla HTML/CSS/JS, no framework, no build step. Scrollama handles the scroll triggered transitions through the IntersectionObserver API. Smooth scrolling uses Lenis. Data is preprocessed in Python with pandas and served as static JSON.
+
+
 ## Implementation Breakdown
 
 ### Core
