@@ -46,15 +46,15 @@ We could also think about a **"Deep Dive" section** at the end that groups some 
 
 | Visualization | Main tool | Relevant lectures |
 |---|---|---|
-| Beeswarm | D3.js force simulation | D3.js binding, Interaction design |
-| Radar charts | D3.js radial scales + SVG | Perception and color, Marks & channels |
-| Bubble chart | D3.js scatterplot | Tabular data, Marks & channels |
-| Stacked area | D3.js stack + area generator | Time series, Storytelling |
-| Price strip chart | D3.js force jitter | Tabular data, Interaction design |
-| Chord diagram | D3.js chord layout | Perception and color, Interaction design |
-| Sankey diagram | D3.js + d3-sankey | Marks & channels, Storytelling |
-| Accord heatmap | D3.js color scales + grid | Tabular data, Perception and color |
-| Scroll framework | Scrollama (IntersectionObserver) | Storytelling with data |
+| Beeswarm | D3.js force simulation | D3.js, Interactions |
+| Radar charts | D3.js radial scales + SVG | Perception of colors, Marks and Channels |
+| Bubble chart | D3.js scatterplot | Data, Marks and Channels |
+| Stacked area | D3.js stack + area generator | Data, Interactive D3 |
+| Price strip chart | D3.js force jitter | Data, Interactions |
+| Chord diagram | D3.js chord layout | Perception of colors, Interactive D3 |
+| Sankey diagram | D3.js + d3-sankey | Marks and Channels, Designing viz |
+| Accord heatmap | D3.js color scales + grid | Data, Perception of colors |
+| Scroll framework | Scrollama (IntersectionObserver) | Designing viz, Do and dont in viz |
 | Data preprocessing | Python + pandas | n/a |
 | Hosting | GitHub Pages | n/a |
 
