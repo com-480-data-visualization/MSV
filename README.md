@@ -6,6 +6,7 @@ An interactive scrollytelling data visualization exploring what makes a perfume 
 
 | Student | SCIPER |
 | --- | --- |
+| Rayane Charif Chefchaouni | 339839 |
 | Gaël Conde Losada | 329871 |
 | Alexandre Jean Marcel Mourot | 346365 |
 
