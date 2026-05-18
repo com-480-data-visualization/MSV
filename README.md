@@ -103,7 +103,7 @@ See [milestones/Milestone1.md](milestones/Milestone1.md) for the full report inc
 
 See [milestones/Milestone2.md](milestones/Milestone2.md) for the project goal, visualization sketches, tools, and MVP breakdown.
 
-## Milestone 3 (29th May, 5pm)
+## Milestone 3 (30th May, 5pm)
 
 **80% of the final grade**
 

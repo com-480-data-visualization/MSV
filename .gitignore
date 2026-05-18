@@ -1,0 +1,6 @@
+.vercel
+.claude/
+CLAUDE.md
+LONG_RUN_*.md
+NIGHT_SHIFT_*.md
+node_modules/
