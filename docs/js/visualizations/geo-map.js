@@ -261,6 +261,19 @@
         drawSideRadar(radarContainer, geoData, null);
       }
 
+      var geoSteps = document.querySelectorAll('.geo-steps .step');
+      if (geoSteps.length > 0) {
+        geoSteps[0].classList.add('is-active');
+        onStep(0);
+        geoSteps.forEach(function (stepEl, idx) {
+          stepEl.addEventListener('click', function () {
+            geoSteps.forEach(function (s) { s.classList.remove('is-active'); });
+            stepEl.classList.add('is-active');
+            onStep(idx);
+          });
+        });
+      }
+
     }).catch(function (err) {
       console.error('GeoMap: failed to load data —', err);
     });
