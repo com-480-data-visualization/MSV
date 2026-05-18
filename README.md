@@ -40,11 +40,11 @@ This project analyzes 24,063 perfumes from the Fragrantica dataset and 2,000+ eB
 
 ```bash
 # Clone the repository
-git clone https://github.com/alexandre-mrt/com-480-dataviz.git
-cd com-480-dataviz
+git clone https://github.com/com-480-data-visualization/MSV.git
+cd MSV
 
 # Start a local server in the website directory
-cd website
+cd docs
 python3 -m http.server 8000
 
 # Open http://localhost:8000 in your browser
@@ -52,7 +52,7 @@ python3 -m http.server 8000
 
 ### Data preprocessing (optional)
 
-The processed JSON files are already included in `website/data/`. To regenerate from raw CSVs:
+The processed JSON files are already included in `docs/data/`. To regenerate from raw CSVs:
 
 ```bash
 cd src
@@ -63,7 +63,7 @@ python3 compute_advanced_data.py
 ## Project Structure
 
 ```
-website/                  # Deployable website
+docs/                     # Deployable website
   index.html              # Main page with scrollytelling structure
   css/style.css           # Dark luxury theme styles
   js/main.js              # Scrollama setup, navigation, shared utilities
