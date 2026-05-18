@@ -243,6 +243,10 @@
             }
           });
 
+          if (radarContainer) {
+            drawSideRadar(radarContainer, geoData, region);
+          }
+
           var count = regionCountMap[region] || null;
           window.showTooltip(buildTooltipHtml(region, count), event.pageX, event.pageY);
         })
@@ -253,6 +257,9 @@
           window.showTooltip(buildTooltipHtml(region, count), event.pageX, event.pageY);
         })
         .on('mouseleave', function () {
+          if (radarContainer) {
+            drawSideRadar(radarContainer, geoData, null);
+          }
           countryPaths.each(function () {
             var el = d3.select(this);
             var r = el.attr('data-region');
