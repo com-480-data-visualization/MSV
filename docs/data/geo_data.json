@@ -1,0 +1,233 @@
+{
+  "regions": [
+    {
+      "name": "Europe",
+      "countries": [
+        "France",
+        "Italy",
+        "UK",
+        "Spain",
+        "Germany",
+        "Sweden",
+        "Switzerland",
+        "Netherlands",
+        "Russia",
+        "Poland",
+        "Greece",
+        "Denmark",
+        "Czech Republic",
+        "Romania",
+        "Portugal",
+        "Latvia"
+      ],
+      "count": 15874,
+      "families": {
+        "floral": 28360,
+        "woody": 18218,
+        "citrus": 15592,
+        "spicy": 9420,
+        "fresh": 5639,
+        "sweet": 8514,
+        "musky": 16417,
+        "fruity": 7549
+      },
+      "topNotes": [
+        {
+          "note": "musk",
+          "count": 6757
+        },
+        {
+          "note": "bergamot",
+          "count": 5792
+        },
+        {
+          "note": "jasmine",
+          "count": 5179
+        },
+        {
+          "note": "sandalwood",
+          "count": 5139
+        },
+        {
+          "note": "patchouli",
+          "count": 5027
+        }
+      ]
+    },
+    {
+      "name": "North America",
+      "countries": [
+        "USA",
+        "Canada"
+      ],
+      "count": 4580,
+      "families": {
+        "floral": 7968,
+        "woody": 4559,
+        "citrus": 4016,
+        "spicy": 2254,
+        "fresh": 1518,
+        "sweet": 2080,
+        "musky": 4523,
+        "fruity": 2506
+      },
+      "topNotes": [
+        {
+          "note": "musk",
+          "count": 2309
+        },
+        {
+          "note": "sandalwood",
+          "count": 1559
+        },
+        {
+          "note": "amber",
+          "count": 1474
+        },
+        {
+          "note": "bergamot",
+          "count": 1408
+        },
+        {
+          "note": "jasmine",
+          "count": 1400
+        }
+      ]
+    },
+    {
+      "name": "Asia",
+      "countries": [
+        "Japan",
+        "South Korea",
+        "India",
+        "Thailand"
+      ],
+      "count": 385,
+      "families": {
+        "floral": 727,
+        "woody": 460,
+        "citrus": 422,
+        "spicy": 241,
+        "fresh": 139,
+        "sweet": 207,
+        "musky": 377,
+        "fruity": 207
+      },
+      "topNotes": [
+        {
+          "note": "musk",
+          "count": 145
+        },
+        {
+          "note": "bergamot",
+          "count": 140
+        },
+        {
+          "note": "sandalwood",
+          "count": 123
+        },
+        {
+          "note": "rose",
+          "count": 119
+        },
+        {
+          "note": "jasmine",
+          "count": 118
+        }
+      ]
+    },
+    {
+      "name": "Middle East",
+      "countries": [
+        "UAE",
+        "Oman",
+        "Arabia saudi",
+        "Bahrain",
+        "Turkey"
+      ],
+      "count": 1618,
+      "families": {
+        "floral": 2521,
+        "woody": 2186,
+        "citrus": 1422,
+        "spicy": 1268,
+        "fresh": 529,
+        "sweet": 1098,
+        "musky": 2134,
+        "fruity": 856
+      },
+      "topNotes": [
+        {
+          "note": "musk",
+          "count": 859
+        },
+        {
+          "note": "amber",
+          "count": 693
+        },
+        {
+          "note": "vanilla",
+          "count": 626
+        },
+        {
+          "note": "patchouli",
+          "count": 603
+        },
+        {
+          "note": "sandalwood",
+          "count": 596
+        }
+      ]
+    },
+    {
+      "name": "South America",
+      "countries": [
+        "Brazil",
+        "Argentina"
+      ],
+      "count": 1421,
+      "families": {
+        "floral": 2736,
+        "woody": 2036,
+        "citrus": 1748,
+        "spicy": 1025,
+        "fresh": 664,
+        "sweet": 931,
+        "musky": 1764,
+        "fruity": 982
+      },
+      "topNotes": [
+        {
+          "note": "musk",
+          "count": 868
+        },
+        {
+          "note": "amber",
+          "count": 674
+        },
+        {
+          "note": "bergamot",
+          "count": 663
+        },
+        {
+          "note": "sandalwood",
+          "count": 587
+        },
+        {
+          "note": "cedar",
+          "count": 510
+        }
+      ]
+    }
+  ],
+  "families": [
+    "floral",
+    "woody",
+    "citrus",
+    "spicy",
+    "fresh",
+    "sweet",
+    "musky",
+    "fruity"
+  ]
+}
