@@ -42,7 +42,10 @@
     'Egypt': 'Middle East', 'Kuwait': 'Middle East', 'Qatar': 'Middle East', 'Iran': 'Middle East',
     'Israel': 'Middle East', 'Iraq': 'Middle East', 'Jordan': 'Middle East', 'Syria': 'Middle East',
     'Brazil': 'South America', 'Argentina': 'South America', 'Peru': 'South America',
-    'Chile': 'South America', 'Colombia': 'South America',
+    'Chile': 'South America', 'Colombia': 'South America', 'Venezuela': 'South America',
+    'Ecuador': 'South America', 'Bolivia': 'South America', 'Paraguay': 'South America',
+    'Uruguay': 'South America', 'Guyana': 'South America', 'Suriname': 'South America',
+    'Falkland Is.': 'South America', 'Fr. S. Antarctic Lands': 'South America',
   };
 
   function getRegionColor(regionName) {
@@ -200,8 +203,13 @@
           var region = getCountryRegion(d.properties.name);
           return region ? getRegionColor(region) : COLOR_UNMATCHED;
         })
-        .attr('stroke', COLOR_BORDER)
-        .attr('stroke-width', 0.5)
+        .attr('stroke', function (d) {
+          var region = getCountryRegion(d.properties.name);
+          return region ? getRegionColor(region) : COLOR_BORDER;
+        })
+        .attr('stroke-width', function (d) {
+          return getCountryRegion(d.properties.name) ? 0.3 : 0.5;
+        })
         .attr('opacity', DEFAULT_OPACITY)
         .attr('data-region', function (d) {
           return getCountryRegion(d.properties.name) || '';
@@ -210,12 +218,18 @@
         .on('mouseenter', function (event, d) {
           var name = d.properties.name;
           var region = getCountryRegion(name);
-          if (!region) return;
+
+          if (!region) {
+            window.showTooltip(
+              '<div class="tooltip-title" style="color:#666">No data</div>' +
+              '<div class="tooltip-row"><span class="tooltip-label" style="color:#666">Insufficient perfume data for this region</span></div>',
+              event.pageX, event.pageY
+            );
+            return;
+          }
 
           d3.select(this)
             .attr('opacity', 1)
-            .attr('stroke', COLOR_HOVER_STROKE)
-            .attr('stroke-width', HOVER_STROKE_WIDTH)
             .raise();
 
           countryPaths.each(function () {
@@ -239,11 +253,14 @@
           window.showTooltip(buildTooltipHtml(region, count), event.pageX, event.pageY);
         })
         .on('mouseleave', function () {
-          countryPaths
-            .transition().duration(200)
-            .attr('opacity', DEFAULT_OPACITY)
-            .attr('stroke', COLOR_BORDER)
-            .attr('stroke-width', 0.5);
+          countryPaths.each(function () {
+            var el = d3.select(this);
+            var r = el.attr('data-region');
+            el.transition().duration(200)
+              .attr('opacity', DEFAULT_OPACITY)
+              .attr('stroke', r ? getRegionColor(r) : COLOR_BORDER)
+              .attr('stroke-width', r ? 0.3 : 0.5);
+          });
 
           window.hideTooltip();
         });
