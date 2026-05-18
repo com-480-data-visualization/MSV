@@ -4,3 +4,10 @@ CLAUDE.md
 LONG_RUN_*.md
 NIGHT_SHIFT_*.md
 node_modules/
+.DS_Store
+
+# Raw datasets (too large for GitHub — download from Kaggle)
+data/fragrantica/*.csv
+data/perfume-ecommerce/*.csv
+data/*.zip
+data/json/perfumes.json

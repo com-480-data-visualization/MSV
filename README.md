@@ -1,6 +1,6 @@
 # The Anatomy of Scent
 
-An interactive data visualization exploring what makes a perfume attractive, how composition influences popularity, and what trends define modern perfumery.
+An interactive scrollytelling data visualization exploring what makes a perfume attractive, how composition influences popularity, and what trends define modern perfumery.
 
 **Live site**: [com-480-dataviz.vercel.app](https://com-480-dataviz.vercel.app)
 
@@ -17,42 +17,36 @@ This project analyzes 24,063 perfumes from the Fragrantica dataset and 2,000+ eB
 
 ## Visualizations
 
-| Visualization | Type | Data Source |
-| --- | --- | --- |
-| Note Frequency | Force-directed beeswarm | notes_stats.json |
-| Gender Comparison | Dual radar charts | notes_stats.json |
-| Rating vs Popularity | Scatter/bubble chart | notes_stats.json |
-| Temporal Trends | Stacked area chart | temporal_trends.json |
-| Price Analysis | Strip/beeswarm plot | price_data.json |
-| Note Connections | Chord diagram | chord_data.json |
-| Note Flow | Sankey diagram | sankey_data.json |
-| Accord Heatmap | Interactive heatmap | accords_data.json |
+| # | Visualization | Type | Data Source |
+| --- | --- | --- | --- |
+| 1 | The Building Blocks | Force-directed beeswarm | notes_stats.json |
+| 2 | His & Hers | Dual radar charts | notes_stats.json |
+| 3 | The Ratings Game | Scatter/bubble chart | notes_stats.json |
+| 4 | Fifty Years of Fragrance | Stacked area chart | temporal_trends.json |
+| 5 | The Price of Scent | Beeswarm strip plot | price_data.json |
+| 6a | Note Connections | Chord diagram | chord_data.json |
+| 6b | Flow of Fragrance | Sankey diagram | sankey_data.json |
+| 7 | The Full Picture | Interactive heatmap | accords_data.json |
 
 ## Technical Setup
 
 ### Prerequisites
 
 - A modern web browser (Chrome, Firefox, Safari, Edge)
-- Python 3.8+ (only for data preprocessing)
-- A local HTTP server (Python built-in or similar)
+- Python 3.8+ (only needed if regenerating data from raw CSVs)
 
 ### Running locally
 
 ```bash
-# Clone the repository
 git clone https://github.com/com-480-data-visualization/MSV.git
-cd MSV
-
-# Start a local server in the website directory
-cd docs
+cd MSV/docs
 python3 -m http.server 8000
-
-# Open http://localhost:8000 in your browser
+# Open http://localhost:8000
 ```
 
 ### Data preprocessing (optional)
 
-The processed JSON files are already included in `docs/data/`. To regenerate from raw CSVs:
+The processed JSON files are already included in `docs/data/`. To regenerate from raw CSVs, download the datasets from Kaggle (links below) and place them in `data/`, then:
 
 ```bash
 cd src
@@ -63,30 +57,29 @@ python3 compute_advanced_data.py
 ## Project Structure
 
 ```
-docs/                     # Deployable website
-  index.html              # Main page with scrollytelling structure
-  css/style.css           # Dark luxury theme styles
+docs/                     # Deployable website (served by Vercel)
+  index.html              # Scrollytelling main page
+  css/style.css           # Dark luxury theme (Cormorant Garamond + DM Sans)
   js/main.js              # Scrollama setup, navigation, shared utilities
-  js/visualizations/      # One file per D3.js visualization
-  data/                   # Processed JSON files for D3.js
-data/                     # Raw datasets
-  fragrantica/            # Fragrantica perfume dataset (24K entries)
-  perfume-ecommerce/      # eBay pricing dataset
-  json/                   # Processed JSON (canonical copies)
-milestones/               # Course milestone documents
+  js/visualizations/      # One module per D3.js visualization (8 files)
+  data/                   # Pre-processed JSON files for D3.js
+data/                     # Raw datasets (not tracked — download from Kaggle)
+milestones/               # Milestone reports + process book
 src/                      # Python preprocessing scripts
 ```
 
 ## Tech Stack
 
-- **D3.js v7** for all visualizations
-- **Scrollama** for scroll-driven interactions (IntersectionObserver)
-- **Lenis** for smooth momentum scrolling
-- **Vanilla HTML/CSS/JS** (no build tools, no framework)
-- **Python + pandas** for data preprocessing
-- **GitHub Pages** for hosting
+- **D3.js v7** — all 8 interactive visualizations
+- **Scrollama** — scroll-driven narrative transitions (IntersectionObserver)
+- **d3-sankey** — Sankey diagram layout
+- **Vanilla HTML/CSS/JS** — no framework, no build step
+- **Python + pandas** — data preprocessing pipeline
+- **Vercel** — static deployment from `/docs`
 
 ## Data Sources
+
+Raw datasets are not included in the repository (too large). Download from Kaggle:
 
 - [Fragrantica Fragrance Dataset](https://www.kaggle.com/datasets/olgagmiufana1/fragrantica-com-fragrance-dataset) (~24K perfumes with notes, ratings, accords, gender, year)
 - [Perfume E-Commerce Dataset 2024](https://www.kaggle.com/datasets/kanchana1990/perfume-e-commerce-dataset-2024) (~2K eBay listings with pricing)
@@ -103,11 +96,12 @@ See [milestones/Milestone1.md](milestones/Milestone1.md) for the full report inc
 
 See [milestones/Milestone2.md](milestones/Milestone2.md) for the project goal, visualization sketches, tools, and MVP breakdown.
 
-## Milestone 3 (30th May, 5pm)
+## Milestone 3 (29th May, 5pm)
 
 **80% of the final grade**
 
-Process book: [milestones/ProcessBook.pdf](milestones/ProcessBook.pdf)
+- **Process book**: [milestones/ProcessBook.pdf](milestones/ProcessBook.pdf)
+- **Screencast**: *TODO — add link*
 
 ## Late policy
 
