@@ -1,6 +1,6 @@
 # The Anatomy of Scent
 
-An interactive scrollytelling data visualization exploring what makes a perfume attractive, how composition influences popularity, and what trends define modern perfumery.
+*Making scents of 24,000 perfumes — a statistical journey through the invisible art of fragrance.*
 
 **Live site**: [com-480-dataviz.vercel.app](https://com-480-dataviz.vercel.app)
 
@@ -14,20 +14,21 @@ An interactive scrollytelling data visualization exploring what makes a perfume 
 
 ## About
 
-This project analyzes 24,063 perfumes from the Fragrantica dataset and 2,000+ eBay listings to uncover patterns in fragrance composition, gender preferences, temporal trends, and market pricing. The story is told through a scrollytelling website with 8 interactive D3.js visualizations.
+This project analyzes 24,063 perfumes from the Fragrantica dataset and 2,000+ eBay listings to uncover patterns in fragrance composition, gender preferences, temporal trends, geographic differences, and market pricing. The story is told through a scrollytelling website with 10 interactive D3.js visualizations.
 
 ## Visualizations
 
-| # | Visualization | Type | Data Source |
+| # | Section | Type | Interaction |
 | --- | --- | --- | --- |
-| 1 | The Building Blocks | Force-directed beeswarm | notes_stats.json |
-| 2 | His & Hers | Dual radar charts | notes_stats.json |
-| 3 | The Ratings Game | Scatter/bubble chart | notes_stats.json |
-| 4 | Fifty Years of Fragrance | Stacked area chart | temporal_trends.json |
-| 5 | The Price of Scent | Beeswarm strip plot | price_data.json |
-| 6a | Note Connections | Chord diagram | chord_data.json |
-| 6b | Flow of Fragrance | Sankey diagram | sankey_data.json |
-| 7 | The Full Picture | Interactive heatmap | accords_data.json |
+| 1 | The Building Blocks | Force-directed beeswarm | Hover bubbles for note details |
+| 2 | His & Hers | Dual radar charts | Hover axes, toggle unisex overlay |
+| 3 | The Ratings Game | Scatter/bubble chart | Hover dots for note + rating |
+| 4 | Fifty Years of Fragrance | Stacked area chart | Hover to explore decade trends |
+| 5 | The Price of Scent | Beeswarm strip plot | Hover for brand + price + type |
+| 6a | Note Connections | Chord diagram | Hover notes for strongest pairings |
+| 6b | Flow of Fragrance | Sankey diagram | Hover to trace note layers |
+| 7 | The Geography of Scent | World map + radar chart | Hover map regions, click step cards |
+| 8 | The Full Picture | Interactive heatmap | Click accords for co-occurrence |
 
 ## Technical Setup
 
@@ -53,17 +54,28 @@ The processed JSON files are already included in `docs/data/`. To regenerate fro
 cd src
 pip3 install pandas
 python3 compute_advanced_data.py
+python3 compute_geo_data.py
 ```
 
 ## Project Structure
 
 ```
 docs/                     # Deployable website (served by Vercel)
-  index.html              # Scrollytelling main page
+  index.html              # Scrollytelling main page (8 sections + hero + footer)
   css/style.css           # Dark luxury theme (Cormorant Garamond + DM Sans)
   js/main.js              # Scrollama setup, navigation, shared utilities
-  js/visualizations/      # One module per D3.js visualization (8 files)
-  data/                   # Pre-processed JSON files for D3.js
+  js/visualizations/      # One module per D3.js visualization (10 files)
+    beeswarm.js            # Force-directed note frequency constellation
+    radar.js               # Gender comparison spider charts
+    bubbles.js             # Rating vs frequency scatter
+    timeline.js            # Stacked area temporal trends
+    price.js               # eBay price strip plot
+    chord.js               # Note co-occurrence chord diagram
+    sankey.js              # Top→middle→base note flow
+    geo-radar.js           # Geographic radar utilities
+    geo-map.js             # World choropleth + radar integration
+    heatmap.js             # Accord frequency interactive heatmap
+  data/                   # Pre-processed JSON files for D3.js (8 files)
 data/                     # Raw datasets (not tracked — download from Kaggle)
 milestones/               # Milestone reports + process book
 src/                      # Python preprocessing scripts
@@ -71,8 +83,9 @@ src/                      # Python preprocessing scripts
 
 ## Tech Stack
 
-- **D3.js v7** — all 8 interactive visualizations
+- **D3.js v7** — all 10 interactive visualizations
 - **Scrollama** — scroll-driven narrative transitions (IntersectionObserver)
+- **TopoJSON** — world map geographic data (CDN)
 - **d3-sankey** — Sankey diagram layout
 - **Vanilla HTML/CSS/JS** — no framework, no build step
 - **Python + pandas** — data preprocessing pipeline
@@ -82,7 +95,7 @@ src/                      # Python preprocessing scripts
 
 Raw datasets are not included in the repository (too large). Download from Kaggle:
 
-- [Fragrantica Fragrance Dataset](https://www.kaggle.com/datasets/olgagmiufana1/fragrantica-com-fragrance-dataset) (~24K perfumes with notes, ratings, accords, gender, year)
+- [Fragrantica Fragrance Dataset](https://www.kaggle.com/datasets/olgagmiufana1/fragrantica-com-fragrance-dataset) (~24K perfumes with notes, ratings, accords, gender, year, country)
 - [Perfume E-Commerce Dataset 2024](https://www.kaggle.com/datasets/kanchana1990/perfume-e-commerce-dataset-2024) (~2K eBay listings with pricing)
 
 ## Milestone 1 (20th March, 5pm)
