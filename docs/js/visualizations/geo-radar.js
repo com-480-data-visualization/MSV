@@ -374,4 +374,15 @@
 
     return { onStep: onStep };
   };
+
+  window.GEO_RADAR_UTILS = {
+    REGION_COLORS: REGION_COLORS,
+    FAMILIES: FAMILIES,
+    normalizeRegion: normalizeRegion,
+    polarToCartesian: polarToCartesian,
+    buildPolygonPoints: buildPolygonPoints,
+    pointsToPath: pointsToPath,
+    drawGrid: drawGrid,
+    drawLabels: drawLabels,
+  };
 })();

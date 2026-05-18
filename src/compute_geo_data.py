@@ -16,8 +16,8 @@ REGIONS = {
         'Denmark', 'Czech Republic', 'Romania', 'Portugal', 'Latvia',
     ],
     'North America': ['USA', 'Canada'],
-    'Asia': ['Japan', 'South Korea', 'India', 'Thailand'],
-    'Middle East': ['UAE', 'Oman', 'Arabia saudi', 'Bahrain', 'Turkey'],
+    'Asia': ['Japan', 'South Korea', 'India', 'Thailand', 'Indonesia', 'Malaysia', 'China', 'Hong Kong', 'Pakistan'],
+    'Middle East': ['UAE', 'Oman', 'Arabia saudi', 'Bahrain', 'Turkey', 'Lebanon', 'Egypt', 'Kuwait', 'Qatar', 'Iran'],
     'South America': ['Brazil', 'Argentina'],
 }
 
