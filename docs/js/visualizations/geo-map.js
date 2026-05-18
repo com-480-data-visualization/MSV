@@ -165,6 +165,9 @@
     var radarContainer = document.getElementById(RADAR_CONTAINER_ID);
     var mapSvg, countryPaths, geoData, regionCountMap;
     var currentStep = -1;
+    var geoSteps = null;
+
+    var REGION_TO_STEP = { 'Europe': 0, 'North America': 1, 'Middle East': 2, 'Asia': 3 };
 
     Promise.all([
       d3.json(dataPath),
@@ -247,6 +250,12 @@
             drawSideRadar(radarContainer, geoData, region);
           }
 
+          var stepIdx = REGION_TO_STEP[region];
+          if (geoSteps && stepIdx !== undefined) {
+            geoSteps.forEach(function (s) { s.classList.remove('is-active'); });
+            geoSteps[stepIdx].classList.add('is-active');
+          }
+
           var count = regionCountMap[region] || null;
           window.showTooltip(buildTooltipHtml(region, count), event.pageX, event.pageY);
         })
@@ -259,6 +268,9 @@
         .on('mouseleave', function () {
           if (radarContainer) {
             drawSideRadar(radarContainer, geoData, null);
+          }
+          if (geoSteps) {
+            geoSteps.forEach(function (s) { s.classList.remove('is-active'); });
           }
           countryPaths.each(function () {
             var el = d3.select(this);
@@ -276,7 +288,7 @@
         drawSideRadar(radarContainer, geoData, null);
       }
 
-      var geoSteps = document.querySelectorAll('.geo-steps .step');
+      geoSteps = Array.from(document.querySelectorAll('.geo-steps .step'));
       if (geoSteps.length > 0) {
         geoSteps[0].classList.add('is-active');
         onStep(0);
