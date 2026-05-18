@@ -141,12 +141,10 @@
     }
   }
 
-  function buildTooltipHtml(countryName, regionName, perfumeCount) {
+  function buildTooltipHtml(regionName, perfumeCount) {
     var color = getRegionColor(regionName);
     var html = '<div class="tooltip-title" style="color:' + color + '">' +
-      window.escapeHtml(countryName) + '</div>' +
-      '<div class="tooltip-row"><span class="tooltip-label">Region</span>' +
-      '<span class="tooltip-value">' + window.escapeHtml(regionName) + '</span></div>';
+      window.escapeHtml(regionName) + '</div>';
     if (perfumeCount !== null && perfumeCount !== undefined) {
       html += '<div class="tooltip-row"><span class="tooltip-label">Perfumes</span>' +
         '<span class="tooltip-value">' + perfumeCount.toLocaleString() + '</span></div>';
@@ -232,15 +230,13 @@
           });
 
           var count = regionCountMap[region] || null;
-          var html = buildTooltipHtml(name, region, count);
-          window.showTooltip(html, event.pageX, event.pageY);
+          window.showTooltip(buildTooltipHtml(region, count), event.pageX, event.pageY);
         })
         .on('mousemove', function (event, d) {
-          var name = d.properties.name;
-          var region = getCountryRegion(name);
+          var region = getCountryRegion(d.properties.name);
           if (!region) return;
           var count = regionCountMap[region] || null;
-          window.showTooltip(buildTooltipHtml(name, region, count), event.pageX, event.pageY);
+          window.showTooltip(buildTooltipHtml(region, count), event.pageX, event.pageY);
         })
         .on('mouseleave', function () {
           countryPaths
@@ -309,7 +305,7 @@
     }
 
     function onStep(stepIndex) {
-      if (!mapSvg || stepIndex === currentStep) return;
+      if (!mapSvg) return;
       currentStep = stepIndex;
 
       switch (stepIndex) {
@@ -318,12 +314,16 @@
           if (radarContainer) drawSideRadar(radarContainer, geoData, 'Europe');
           break;
         case 1:
-          highlightMapRegions(['Europe', 'North America']);
-          if (radarContainer) drawSideRadar(radarContainer, geoData, null);
+          highlightMapRegion('North America');
+          if (radarContainer) drawSideRadar(radarContainer, geoData, 'North America');
           break;
         case 2:
-          resetMapHighlights();
-          if (radarContainer) drawSideRadar(radarContainer, geoData, null);
+          highlightMapRegion('Middle East');
+          if (radarContainer) drawSideRadar(radarContainer, geoData, 'Middle East');
+          break;
+        case 3:
+          highlightMapRegion('Asia');
+          if (radarContainer) drawSideRadar(radarContainer, geoData, 'Asia');
           break;
         default:
           resetMapHighlights();

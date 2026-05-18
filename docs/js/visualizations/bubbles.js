@@ -241,12 +241,26 @@
         .attr('r', function (d) { return rScale(d.total); });
     }
 
-    // ── Labels for largest bubbles ──
     function drawLabels() {
       var labeled = bubbleData.slice(0, LABEL_COUNT);
+      var placed = [];
+
+      var visible = labeled.filter(function (d) {
+        var x = xScale(d.frequency);
+        var y = yScale(d.avgRating) - rScale(d.total) - 4;
+        var w = d.note.length * 5;
+        var collides = placed.some(function (p) {
+          return Math.abs(x - p.x) < (w + p.w) / 2 && Math.abs(y - p.y) < 12;
+        });
+        if (!collides) {
+          placed.push({ x: x, y: y, w: w });
+          return true;
+        }
+        return false;
+      });
 
       labelsSelection = g.selectAll('.bubble-label')
-        .data(labeled, function (d) { return d.note; })
+        .data(visible, function (d) { return d.note; })
         .join('text')
         .attr('class', 'bubble-label')
         .attr('x', function (d) { return xScale(d.frequency); })
