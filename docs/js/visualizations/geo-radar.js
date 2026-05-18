@@ -262,18 +262,19 @@
 
       var regions = data.regions;
       var normMap = {};
+      var maxProportion = 0;
       regions.forEach(function (region) {
-        normMap[region.name] = normalizeRegion(region);
+        var nv = normalizeRegion(region);
+        normMap[region.name] = nv;
+        nv.forEach(function (v) { if (v > maxProportion) maxProportion = v; });
       });
-
-      var rScale = d3.scaleLinear().domain([0, 1]).range([0, 0]);
 
       var rect = container.getBoundingClientRect();
       var width = rect.width || 600;
       var height = rect.height || 500;
       var radius = Math.min(width, height) * 0.33;
 
-      rScale = d3.scaleLinear().domain([0, 1]).range([0, radius]);
+      var rScale = d3.scaleLinear().domain([0, maxProportion]).range([0, radius]);
 
       svg = d3.select(container).append('svg')
         .attr('width', width)
