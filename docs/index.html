@@ -21,6 +21,7 @@
       <a href="#section-ratings">Ratings</a>
       <a href="#section-timeline">Timeline</a>
       <a href="#section-price">Price</a>
+      <a href="#section-geo">Geography</a>
     </div>
   </nav>
 
@@ -218,13 +219,41 @@
     <div class="viz-container viz-full-width" id="viz-heatmap"></div>
   </section>
 
+  <!-- Section 8: The Geography of Scent -->
+  <section class="story-section" id="section-geo">
+    <div class="section-intro">
+      <span class="section-number">08</span>
+      <h2 class="section-title">The Geography of Scent</h2>
+      <p class="section-description">
+        Perfume houses in Paris, New York, and Dubai draw on different olfactory traditions.
+        How does composition vary across world regions?
+      </p>
+    </div>
+    <div class="scrolly" id="scrolly-geo-radar">
+      <div class="scrolly-graphic sticky">
+        <div class="viz-container" id="viz-geo-radar"></div>
+      </div>
+      <div class="scrolly-steps">
+        <div class="step" data-step="1">
+          <p><strong>Europe</strong> leads with floral dominance — jasmine and rose are the continent's signatures. With over 15,000 perfumes, European houses set the global standard.</p>
+        </div>
+        <div class="step" data-step="2">
+          <p><strong>North America</strong> overlaps heavily with Europe but leans slightly more fruity. American fragrance culture favors accessible, fresh compositions.</p>
+        </div>
+        <div class="step" data-step="3">
+          <p>The <strong>Middle East</strong> stands apart: more woody, spicy, and musky. Oud-based compositions and resinous bases reflect a centuries-old olfactory tradition fundamentally different from the Western floral canon.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Footer -->
   <footer class="footer">
     <div class="footer-content">
       <p class="footer-title">The Anatomy of Scent</p>
       <p class="footer-credits">
         A COM-480 Data Visualization project at EPFL<br>
-        Alexandre Mourot &amp; Gaël Conde Losada
+        Rayane Charif Chefchaouni, Gaël Conde Losada &amp; Alexandre Mourot
       </p>
       <p class="footer-data">
         Data sources:
@@ -247,6 +276,7 @@
   <script src="js/visualizations/chord.js"></script>
   <script src="js/visualizations/sankey.js"></script>
   <script src="js/visualizations/heatmap.js"></script>
+  <script src="js/visualizations/geo-radar.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

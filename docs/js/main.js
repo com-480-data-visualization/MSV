@@ -215,6 +215,7 @@
     { initFn: 'initChord', containerId: 'viz-chord', dataPath: 'data/chord_data.json', scrollyId: null },
     { initFn: 'initSankey', containerId: 'viz-sankey', dataPath: 'data/sankey_data.json', scrollyId: null },
     { initFn: 'initHeatmap', containerId: 'viz-heatmap', dataPath: 'data/accords_data.json', scrollyId: null },
+    { initFn: 'initGeoRadar', containerId: 'viz-geo-radar', dataPath: 'data/geo_data.json', scrollyId: 'scrolly-geo-radar' },
   ];
 
   function lazyInitViz(config) {
