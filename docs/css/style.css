@@ -455,6 +455,17 @@ strong {
   color: var(--text-secondary);
 }
 
+/* Hover hints */
+.hover-hint {
+  text-align: center;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 0.8rem;
+  opacity: 0.5;
+}
+
 /* ============================================
    ANIMATIONS
    ============================================ */
