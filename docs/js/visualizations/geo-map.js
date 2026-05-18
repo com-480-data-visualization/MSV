@@ -113,15 +113,18 @@
         .attr('stroke-width', 2)
         .attr('stroke-opacity', region.name === highlightRegion ? 1 : (highlightRegion ? 0.2 : 0.8));
 
-      points.forEach(function (pt) {
-        rg.append('circle')
-          .attr('cx', pt.x).attr('cy', pt.y)
-          .attr('r', 3)
-          .attr('fill', color)
-          .attr('fill-opacity', opacity + 0.2)
-          .attr('stroke', '#0a0a0a')
-          .attr('stroke-width', 1);
-      });
+      var showDots = !highlightRegion || region.name === highlightRegion;
+      if (showDots) {
+        points.forEach(function (pt) {
+          rg.append('circle')
+            .attr('cx', pt.x).attr('cy', pt.y)
+            .attr('r', 3)
+            .attr('fill', color)
+            .attr('fill-opacity', opacity + 0.2)
+            .attr('stroke', '#0a0a0a')
+            .attr('stroke-width', 1);
+        });
+      }
     });
 
     if (highlightRegion) {
@@ -228,10 +231,6 @@
             }
           });
 
-          if (radarContainer) {
-            drawSideRadar(radarContainer, geoData, region);
-          }
-
           var count = regionCountMap[region] || null;
           var html = buildTooltipHtml(name, region, count);
           window.showTooltip(html, event.pageX, event.pageY);
@@ -249,10 +248,6 @@
             .attr('opacity', DEFAULT_OPACITY)
             .attr('stroke', COLOR_BORDER)
             .attr('stroke-width', 0.5);
-
-          if (radarContainer) {
-            drawSideRadar(radarContainer, geoData, null);
-          }
 
           window.hideTooltip();
         });

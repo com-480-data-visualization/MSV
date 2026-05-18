@@ -7,11 +7,11 @@
   'use strict';
 
   // ── Constants ──
-  var TOP_N = 30;
+  var TOP_N = 40;
   var LABEL_COUNT = 10;
   var TRANSITION_MS = 600;
   var MARGIN = { top: 40, right: 40, bottom: 60, left: 70 };
-  var BUBBLE_RADIUS_RANGE = [3, 22];
+  var BUBBLE_RADIUS_RANGE = [5, 38];
   var LABEL_FONT_SIZE = '9px';
   var AXIS_FONT_SIZE = '11px';
   var AXIS_FONT_FAMILY = 'DM Sans, sans-serif';
