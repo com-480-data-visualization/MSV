@@ -397,7 +397,7 @@
   <h3>Key Technical Decisions</h3>
 
   <p>
-    <strong>Scrollama</strong> wraps the IntersectionObserver API to determine which narrative step is active, letting us define scroll beats as HTML divs and trigger D3 transitions declaratively. We initially used <strong>Lenis</strong> for smooth scrolling but removed it after it caused lag with D3 force simulations — native CSS <code>scroll-behavior: smooth</code> proved sufficient. We centralized tooltip logic, color scales, and note family mappings in <code>main.js</code>; each of the eight visualization modules follows the same pattern: one init function, one JSON file, one SVG. Co-occurrence and Sankey computations were moved to Python after the JavaScript version took 4+ seconds.
+    <strong>Scrollama</strong> wraps the IntersectionObserver API to determine which narrative step is active, letting us define scroll beats as HTML divs and trigger D3 transitions declaratively. We initially used <strong>Lenis</strong> for smooth scrolling but removed it after it caused lag with D3 force simulations, so native CSS <code>scroll-behavior: smooth</code> proved sufficient. We centralized tooltip logic, color scales, and note family mappings in <code>main.js</code>; each of the eight visualization modules follows the same pattern: one init function, one JSON file, one SVG. Co-occurrence and Sankey computations were moved to Python after the JavaScript version took 4+ seconds.
   </p>
 
   <div class="sketch-box">
@@ -474,7 +474,7 @@
   </p>
 
   <p>
-    <strong>SVG sizing bug.</strong> Sticky containers inside flex parents had zero computed width on page load. The fix: lazy initialization via IntersectionObserver — each visualization only initializes when its container enters the viewport.
+    <strong>SVG sizing bug.</strong> Sticky containers inside flex parents had zero computed width on page load. The fix was lazy initialization via IntersectionObserver, where each visualization only initializes when its container enters the viewport.
   </p>
 
   <p>
@@ -500,11 +500,11 @@
   </div>
 
   <div class="insight">
-    <strong>Composition trends mirror culture; price does not mirror composition.</strong> The timeline reveals a clear arc from aldehydic glamour (1970s) through clean aquatic (1990s) to gourmand and oud (2010s–2020s). Yet the price scatter shows no clean correlation between ingredient sophistication and market value — brand cachet drives pricing more than raw composition.
+    <strong>Composition trends mirror culture; price does not mirror composition.</strong> The timeline reveals a clear arc from aldehydic glamour (1970s) through clean aquatic (1990s) to gourmand and oud (2010s–2020s). Yet the price scatter shows no clean correlation between ingredient sophistication and market value. Brand cachet drives pricing more than raw composition.
   </div>
 
   <div class="insight">
-    <strong>Geography shapes scent identity.</strong> An interactive world map with radar-on-hover (added after M2 feedback) reveals that the Middle East stands apart from every other region — higher woody, spicy, and musky proportions reflect an oud-based tradition fundamentally different from the Western floral canon. Europe and North America overlap heavily, while Asia favors lighter, citrus-forward profiles.
+    <strong>Geography shapes scent identity.</strong> An interactive world map with radar-on-hover (added after M2 feedback) reveals that the Middle East stands apart from every other region. Higher woody, spicy, and musky proportions reflect an oud-based tradition fundamentally different from the Western floral canon. Europe and North America overlap heavily, while Asia favors lighter, citrus-forward profiles.
   </div>
 
   <h2>Peer Assessment</h2>
@@ -553,7 +553,7 @@
   <h2>Conclusion</h2>
 
   <p>
-    The Anatomy of Scent transforms 24,063 rows of perfume data into a story anyone can follow. Through eight interactive visualizations — including a world map added in response to M2 feedback — we made the hidden structure of perfumery visible and explorable across composition, gender, time, geography, and price. The project taught us that the hardest part of data visualization is not the code or the data. It is choosing what to show, when to show it, and how much to let the reader discover on their own.
+    The Anatomy of Scent transforms 24,063 rows of perfume data into a story anyone can follow. Through eight interactive visualizations, including a world map added in response to M2 feedback, we made the hidden structure of perfumery visible and explorable across composition, gender, time, geography, and price. The project taught us that the hardest part of data visualization is not the code or the data. It is choosing what to show, when to show it, and how much to let the reader discover on their own.
   </p>
 </div>
 
