@@ -115,7 +115,7 @@ See [milestones/Milestone2.md](milestones/Milestone2.md) for the project goal, v
 **80% of the final grade**
 
 - **Process book**: [milestones/ProcessBook.pdf](milestones/ProcessBook.pdf)
-- **Screencast**: *TODO — add link*
+- **Screencast**: [YouTube](https://youtu.be/mkwQGziD9j0) | [screencast.mp4](screencast.mp4)
 
 ## Late policy
 
